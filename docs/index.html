@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Payments Analytics</title>
+<meta name="description" content="Interactive analytics dashboard for corporate card payments in Mexico, Colombia and Brazil: growth, segment concentration, cohort retention, data quality and fraud signals. Synthetic data.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='7' width='28' height='18' rx='4' fill='%232a78d6'/%3E%3Crect x='2' y='11' width='28' height='3' fill='%230d366b'/%3E%3Crect x='6' y='18' width='8' height='3' rx='1' fill='%23cde2fb'/%3E%3C/svg%3E">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-raised: #ffffff;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #6b6a66;      /* muted ink darkened for 4.5:1 text contrast on the page plane */
+  --axis-muted: #898781;
+  --grid: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --accent: #2a78d6;
+  --accent-ink: #1c5cab;
+  --accent-wash: rgba(42, 120, 214, 0.10);
+  --deemph: #c3c2b7;
+  --s1: #2a78d6;   /* Corporate */
+  --s2: #eb6834;   /* SMB */
+  --s3: #1baf7a;   /* Startup */
+  --up: #006300;
+  --down: #b42323;
+  --good: #0ca30c;
+  --critical: #d03b3b;
+  --warning: #fab219;
+  --seq: #cde2fb,#b7d3f6,#9ec5f4,#86b6ef,#6da7ec,#5598e7,#3987e5,#2a78d6,#256abf,#1c5cab,#184f95,#104281,#0d366b;
+  --shadow: 0 1px 2px rgba(11,11,11,.04), 0 4px 16px rgba(11,11,11,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-raised: #222220;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #a3a29b;
+    --axis-muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --accent: #3987e5;
+    --accent-ink: #86b6ef;
+    --accent-wash: rgba(57, 135, 229, 0.14);
+    --deemph: #4a4a46;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --up: #0ca30c;
+    --down: #e66767;
+    --seq: #1d2a3a,#14325a,#104281,#184f95,#1c5cab,#256abf,#2a78d6,#3987e5,#5598e7,#6da7ec,#86b6ef,#9ec5f4,#b7d3f6;
+    --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-raised: #222220;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #a3a29b;
+  --axis-muted: #898781;
+  --grid: #2c2c2a;
+  --baseline: #383835;
+  --border: rgba(255, 255, 255, 0.10);
+  --accent: #3987e5;
+  --accent-ink: #86b6ef;
+  --accent-wash: rgba(57, 135, 229, 0.14);
+  --deemph: #4a4a46;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --up: #0ca30c;
+  --down: #e66767;
+  --seq: #1d2a3a,#14325a,#104281,#184f95,#1c5cab,#256abf,#2a78d6,#3987e5,#5598e7,#6da7ec,#86b6ef,#9ec5f4,#b7d3f6;
+  --shadow: none;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent-ink); }
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- header */
+header.top { padding: 32px 0 8px; }
+.brand { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.eyebrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  padding: 3px 10px; border-radius: 999px;
+  background: var(--accent-wash); color: var(--accent-ink);
+}
+.pill.neutral { background: transparent; color: var(--text-secondary); box-shadow: inset 0 0 0 1px var(--border); }
+h1 { font-size: clamp(24px, 3.2vw, 34px); line-height: 1.15; margin: 0 0 6px; letter-spacing: -0.02em; font-weight: 700; }
+.lede { color: var(--text-secondary); margin: 0; max-width: 72ch; }
+.theme-btn {
+  border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary);
+  border-radius: 8px; padding: 6px 12px; font: inherit; font-size: 13px; cursor: pointer;
+}
+.theme-btn:hover { color: var(--text-primary); }
+
+/* ---------- sticky filter + nav bar */
+.bar {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--page) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--border);
+  margin-top: 20px;
+}
+.bar .wrap { display: flex; gap: 12px 20px; align-items: center; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+.filters { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.filters .fgroup { display: inline-flex; align-items: center; gap: 8px; }
+.filters label { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.filters select {
+  font: inherit; font-size: 14px; color: var(--text-primary);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 6px 30px 6px 10px; appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%;
+  background-size: 5px 5px; background-repeat: no-repeat;
+}
+.filters select:focus-visible, .theme-btn:focus-visible, nav.sections a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filters .reset { font: inherit; font-size: 13px; background: none; border: 0; color: var(--accent-ink); cursor: pointer; padding: 4px; }
+.filters .reset[hidden] { display: none; }
+nav.sections { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+nav.sections a {
+  font-size: 13px; color: var(--text-secondary); text-decoration: none;
+  padding: 5px 10px; border-radius: 6px;
+}
+nav.sections a:hover { background: var(--accent-wash); color: var(--text-primary); }
+
+/* ---------- sections and cards */
+main { padding: 24px 0 40px; }
+section { margin-top: 36px; }
+section:first-child { margin-top: 8px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+h2 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+.sec-note { font-size: 13px; color: var(--text-muted); margin: 0; }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.span-12 { grid-column: span 12; } .span-8 { grid-column: span 8; } .span-7 { grid-column: span 7; }
+.span-6 { grid-column: span 6; } .span-5 { grid-column: span 5; } .span-4 { grid-column: span 4; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  padding: 18px 18px 14px; box-shadow: var(--shadow); min-width: 0;
+}
+.card h3 { font-size: 15.5px; line-height: 1.35; margin: 0 0 2px; font-weight: 650; }
+.card .sub { font-size: 13px; color: var(--text-muted); margin: 0 0 12px; }
+.chart { position: relative; height: 280px; }
+.chart.tall { height: 340px; }
+.chart.short { height: 220px; }
+details.tv { margin-top: 10px; border-top: 1px solid var(--grid); padding-top: 8px; }
+details.tv summary { font-size: 12.5px; color: var(--text-muted); cursor: pointer; user-select: none; }
+details.tv summary:hover { color: var(--text-primary); }
+.tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.data { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+table.data th { text-align: left; font-weight: 600; color: var(--text-muted); font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--baseline); white-space: nowrap; }
+table.data td { padding: 6px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; color: var(--text-secondary); }
+table.data td:first-child { color: var(--text-primary); }
+#gt-table table.data td:first-child { white-space: normal; min-width: 180px; }
+table.data .num, table.data th.num { text-align: right; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-secondary); margin: -4px 0 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; }
+.legend i.box { width: 10px; height: 10px; border-radius: 2px; }
+
+/* ---------- KPI tiles */
+.kpis { display: grid; gap: 12px; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); min-width: 0; }
+.kpi .label { font-size: 12.5px; color: var(--text-muted); font-weight: 600; }
+.kpi .value { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.2; margin-top: 4px; white-space: nowrap; }
+.kpi.hero { grid-column: span 2; }
+.kpi.hero .value { font-size: 48px; letter-spacing: -0.03em; line-height: 1.05; }
+.kpi .delta { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; }
+.kpi .delta b { font-weight: 650; }
+.kpi .delta .up { color: var(--up); } .kpi .delta .down { color: var(--down); }
+.kpi svg.spark { display: block; width: 100%; height: 40px; margin-top: 8px; overflow: visible; }
+.kpi:not(.hero) svg.spark { height: 28px; margin-top: 10px; }
+
+/* ---------- stat strip (quality / fraud) */
+.stats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-bottom: 4px; }
+.stat { padding: 2px 0; }
+.stat .label { font-size: 12.5px; color: var(--text-muted); font-weight: 600; }
+.stat .value { font-size: 24px; font-weight: 650; letter-spacing: -0.02em; }
+.stat .hint { font-size: 12.5px; color: var(--text-muted); }
+
+/* ---------- heatmap */
+table.heat { border-collapse: separate; border-spacing: 2px; font-size: 12.5px; width: 100%; min-width: 640px; font-variant-numeric: tabular-nums; }
+table.heat th { font-weight: 600; color: var(--text-muted); font-size: 12px; padding: 4px 6px; text-align: center; white-space: nowrap; }
+table.heat th.row { text-align: left; color: var(--text-primary); }
+table.heat td { text-align: center; padding: 7px 4px; border-radius: 4px; min-width: 40px; cursor: default; }
+table.heat td.empty { background: transparent; }
+table.heat td.size { color: var(--text-secondary); background: transparent; text-align: right; padding-right: 10px; }
+table.heat td:not(.empty):not(.size):hover, table.heat td:focus { outline: 2px solid var(--text-primary); outline-offset: -1px; }
+.scale { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-top: 10px; flex-wrap: wrap; }
+.scale .ramp { display: flex; height: 10px; width: 180px; border-radius: 3px; overflow: hidden; }
+.scale .ramp span { flex: 1; }
+
+/* ---------- badges / checks */
+.tag { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; }
+.tag svg { flex: none; }
+.tag.ok { color: var(--up); } .tag.no { color: var(--text-muted); }
+ul.checks { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+ul.checks li { display: flex; gap: 8px; align-items: flex-start; }
+ul.checks li svg { flex: none; margin-top: 2px; }
+.callout { font-size: 13.5px; color: var(--text-secondary); background: var(--accent-wash); border-radius: 10px; padding: 10px 12px; margin-top: 12px; }
+.callout b { color: var(--text-primary); }
+
+/* ---------- tooltip for heatmap */
+#tip {
+  position: fixed; pointer-events: none; z-index: 50; opacity: 0; transition: opacity .08s;
+  background: var(--surface-raised); color: var(--text-primary); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; font-size: 12.5px; box-shadow: 0 6px 24px rgba(0,0,0,.18);
+}
+#tip b { font-size: 15px; display: block; }
+#tip span { color: var(--text-muted); }
+
+footer { border-top: 1px solid var(--border); padding: 22px 0 40px; color: var(--text-muted); font-size: 13px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.load-error { padding: 40px 0; color: var(--text-secondary); }
+.load-error code { background: var(--accent-wash); padding: 2px 6px; border-radius: 4px; }
+
+@media (max-width: 1100px) {
+  .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .kpi.hero { grid-column: span 1; }
+  .kpi.hero .value { font-size: 40px; }
+  .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  header.top { padding-top: 20px; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpi.hero { grid-column: span 2; }
+  .kpi.hero .value { font-size: 40px; }
+  .kpi:last-child { grid-column: span 2; }
+  .kpi .value { font-size: 22px; }
+  nav.sections { display: none; }
+  .card { padding: 14px 12px 12px; }
+  .chart { height: 240px; } .chart.tall { height: 300px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap brand">
+    <div>
+      <div class="eyebrow">
+        <span class="pill">Synthetic data</span>
+        <span class="pill neutral" id="window-pill">12 months</span>
+      </div>
+      <h1>Corporate Card Payments Analytics</h1>
+      <p class="lede">Growth, client concentration, cohort retention, data quality and fraud signals for a corporate card program across Mexico, Colombia and Brazil. Built with SQL (SQLite) and Python; data is synthetic with injected quality issues and fraud patterns, so detection can be measured against ground truth.</p>
+    </div>
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle color theme">Theme: auto</button>
+  </div>
+</header>
+
+<div class="bar" role="region" aria-label="Filters">
+  <div class="wrap">
+    <div class="filters">
+      <span class="fgroup"><label for="f-pais">Country</label>
+      <select id="f-pais"></select></span>
+      <span class="fgroup"><label for="f-seg">Segment</label>
+      <select id="f-seg"></select></span>
+      <button class="reset" id="f-reset" type="button" hidden>Reset</button>
+    </div>
+    <nav class="sections" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#segments">Segments &amp; Pareto</a>
+      <a href="#retention">Retention</a>
+      <a href="#quality">Data quality</a>
+      <a href="#fraud">Fraud signals</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap" id="app" aria-live="polite">
+  <section id="overview" aria-labelledby="h-overview">
+    <div class="sec-head"><h2 id="h-overview">Overview</h2><p class="sec-note" id="scope-note"></p></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="grid" style="margin-top:16px">
+      <div class="card span-7"><h3 id="t-vol"></h3><p class="sub">Approved volume per month, USD</p>
+        <div class="chart"><canvas id="c-vol" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-vol"></div></details></div>
+      <div class="card span-5"><h3 id="t-segm"></h3><p class="sub">Approved volume per month by segment, USD</p>
+        <div class="legend" id="lg-segm"></div>
+        <div class="chart"><canvas id="c-segm" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-segm"></div></details></div>
+      <div class="card span-6"><h3 id="t-appr"></h3><p class="sub">Approved ÷ all cleaned transactions, by month</p>
+        <div class="chart short"><canvas id="c-appr" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-appr"></div></details></div>
+      <div class="card span-6"><h3 id="t-dom"></h3><p class="sub">Average approved transactions per calendar day, indexed (average day = 100)</p>
+        <div class="chart short"><canvas id="c-dom" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-dom"></div></details></div>
+    </div>
+  </section>
+
+  <section id="segments" aria-labelledby="h-segments">
+    <div class="sec-head"><h2 id="h-segments">Segments &amp; Pareto</h2><p class="sec-note">Where the money is concentrated</p></div>
+    <div class="grid">
+      <div class="card span-6"><h3 id="t-seg"></h3><p class="sub">Share of approved volume vs share of active clients</p>
+        <div class="legend"><span><i class="box" style="background:var(--s1)"></i>Share of volume</span><span><i class="box" style="background:var(--deemph)"></i>Share of clients</span></div>
+        <div class="chart short"><canvas id="c-seg" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-seg"></div></details></div>
+      <div class="card span-6"><h3 id="t-par"></h3><p class="sub">Cumulative share of volume vs share of clients, ranked by spend</p>
+        <div class="chart short"><canvas id="c-par" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-par"></div></details></div>
+      <div class="card span-7"><h3 id="t-cat"></h3><p class="sub">Approved volume by merchant category, USD</p>
+        <div class="chart"><canvas id="c-cat" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-cat"></div></details></div>
+      <div class="card span-5"><h3 id="t-pais"></h3><p class="sub">Approved volume by client country, USD</p>
+        <div class="chart"><canvas id="c-pais" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-pais"></div></details></div>
+    </div>
+  </section>
+
+  <section id="retention" aria-labelledby="h-retention">
+    <div class="sec-head"><h2 id="h-retention">Retention cohorts</h2><p class="sec-note">Cohort = month of a client's first approved transaction</p></div>
+    <div class="grid">
+      <div class="card span-8"><h3 id="t-coh"></h3><p class="sub">Share of each cohort with ≥ 1 approved transaction in month k after the first one</p>
+        <div class="tscroll"><table class="heat" id="heat" aria-describedby="t-coh"></table></div>
+        <div class="scale" id="heat-scale"></div>
+        <p class="sec-note" style="margin-top:8px" id="coh-note"></p></div>
+      <div class="card span-4"><h3 id="t-ret"></h3><p class="sub">Retention by months since first purchase, weighted by cohort size</p>
+        <div class="chart"><canvas id="c-ret" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-ret"></div></details></div>
+    </div>
+  </section>
+
+  <section id="quality" aria-labelledby="h-quality">
+    <div class="sec-head"><h2 id="h-quality">Data quality</h2><p class="sec-note">Portfolio-wide · raw table, before cleaning · not affected by filters</p></div>
+    <div class="grid">
+      <div class="card span-7"><h3 id="t-dq"></h3><p class="sub">Rows removed by each cleaning rule (sql/01_limpieza.sql)</p>
+        <div class="stats" id="dq-stats"></div>
+        <div class="chart short"><canvas id="c-dq" role="img"></canvas></div><details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-dq"></div></details></div>
+      <div class="card span-5"><h3>Integrity checks with zero violations</h3><p class="sub">Consistency rules from sql/07_calidad_datos.sql</p>
+        <ul class="checks" id="dq-checks"></ul>
+        <div class="callout" id="dq-callout"></div></div>
+    </div>
+  </section>
+
+  <section id="fraud" aria-labelledby="h-fraud">
+    <div class="sec-head"><h2 id="h-fraud">Anomalies &amp; fraud signals</h2><p class="sec-note">Portfolio-wide · card numbers masked · not affected by filters</p></div>
+    <div class="grid">
+      <div class="card span-6"><h3 id="t-rule"></h3><p class="sub">Cards flagged for spending spikes (cards with ≥ 30 approved transactions)</p>
+        <div class="chart short"><canvas id="c-rule" role="img"></canvas></div>
+        <div class="callout" id="rule-callout"></div>
+        <details class="tv"><summary>View as table</summary><div class="tscroll" id="tv-rule"></div></details></div>
+      <div class="card span-6"><h3 id="t-gt"></h3><p class="sub">Detection scored against the generator's injected ground truth</p>
+        <div class="tscroll" id="gt-table"></div>
+        <p class="sec-note" style="margin-top:10px">Precision = flagged that are real · Recall = real that are flagged. Full evaluation in <a href="https://github.com/fpadillagarcia100-oss/analisis-transacciones/blob/main/reports/hallazgos.md">reports/hallazgos.md</a>.</p></div>
+      <div class="card span-12"><h3 id="t-ct"></h3><p class="sub" id="ct-sub"></p>
+        <div class="tscroll" id="ct-table"></div></div>
+      <div class="card span-12"><h3 id="t-sp"></h3><p class="sub">Cards with ≥ 3 approved transactions at ≥ 25× the card's own median ticket</p>
+        <div class="tscroll" id="sp-table"></div></div>
+      <div class="card span-12"><h3 id="t-top"></h3><p class="sub">Largest single transactions relative to the card's median ticket</p>
+        <div class="tscroll" id="top-table"></div></div>
+    </div>
+  </section>
+</main>
+
+<div id="tip" role="tooltip"></div>
+
+<footer>
+  <div class="wrap">
+    <span>Synthetic data · Built by Francisco Padilla García · <a href="https://github.com/fpadillagarcia100-oss/analisis-transacciones">GitHub</a></span>
+    <span id="gen-note"></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  // ------------------------------------------------------------------ labels (data is in Spanish)
+  const L = {
+    Todos: "All", Mexico: "Mexico", Colombia: "Colombia", Brasil: "Brazil",
+    Startup: "Startup", PyME: "SMB", Corporativo: "Corporate",
+    Viajes: "Travel", Publicidad: "Advertising", "Servicios Profesionales": "Professional services",
+    Software: "Software", Logistica: "Logistics", Otros: "Other", Oficina: "Office", Alimentos: "Food & dining",
+    aprobada: "Approved", rechazada: "Declined", reversada: "Reversed",
+  };
+  const lab = (k) => L[k] ?? k;
+  const QL = [
+    [/^Duplicados/i, "Duplicate rows"],
+    [/^comercio NULL/i, "Missing merchant"],
+    [/^Monto negativo/i, "Negative amount (not a reversal)"],
+    [/^fecha_hora en el futuro/i, "Future timestamp"],
+    [/^Tarjetas sin/i, "Cards with no transactions"],
+    [/^Reversadas con monto positivo/i, "Reversal with positive amount"],
+    [/^Monto NULL/i, "Amount null or zero"],
+    [/^Transaccion con cliente distinto/i, "Transaction client ≠ card owner"],
+    [/^Transaccion anterior a la emision/i, "Transaction before card issue date"],
+    [/^Transaccion anterior al alta/i, "Transaction before client onboarding"],
+  ];
+  const qlab = (s) => { for (const [re, t] of QL) if (re.test(s)) return t; return s; };
+  const SEG_SLOT = { Corporativo: "--s1", PyME: "--s2", Startup: "--s3" };   // color follows the entity
+
+  // ------------------------------------------------------------------ formatting
+  const nf0 = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+  const nf1 = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+  const nf2 = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  const usd = (v) => {
+    if (v == null) return "–";
+    const a = Math.abs(v);
+    if (a >= 1e6) return "$" + (v / 1e6).toFixed(a >= 1e8 ? 0 : 1) + "M";
+    if (a >= 1e3) return "$" + (v / 1e3).toFixed(a >= 1e5 ? 0 : 1) + "K";
+    return "$" + nf0.format(v);
+  };
+  const usdFull = (v) => v == null ? "–" : "$" + nf0.format(v);
+  const usd2 = (v) => v == null ? "–" : "$" + nf2.format(v);
+  const pct = (v, d = 1) => v == null ? "–" : (d === 0 ? nf0 : nf1).format(v) + "%";
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const mlab = (m) => MONTHS[+m.slice(5, 7) - 1] + " " + m.slice(2, 4);
+  const mlong = (m) => MONTHS[+m.slice(5, 7) - 1] + " " + m.slice(0, 4);
+
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, attrs = {}, text) => {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+    }
+    if (text != null) e.textContent = text;
+    return e;
+  };
+
+  // table builder (textContent only: labels are data, never HTML)
+  function table(container, cols, rows) {
+    const t = el("table", { class: "data" });
+    const tr = el("tr");
+    cols.forEach((c) => tr.appendChild(el("th", c.num ? { class: "num" } : {}, c.h)));
+    t.appendChild(el("thead")).appendChild(tr);
+    const tb = el("tbody");
+    rows.forEach((r) => {
+      const row = el("tr");
+      cols.forEach((c) => {
+        const td = el("td", c.num ? { class: "num" } : {});
+        const v = c.f ? c.f(r) : r[c.k];
+        if (v instanceof Node) td.appendChild(v); else td.textContent = v;
+        row.appendChild(td);
+      });
+      tb.appendChild(row);
+    });
+    t.appendChild(tb);
+    container.replaceChildren(t);
+  }
+
+  const ICON_OK = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.8 8.3l2.1 2.1 4.3-4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const ICON_NO = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 8h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  function tag(ok, yes = "Confirmed", no = "False positive") {
+    const s = el("span", { class: "tag " + (ok ? "ok" : "no") });
+    s.innerHTML = ok ? ICON_OK : ICON_NO;          // static icon markup only
+    s.appendChild(document.createTextNode(ok == null ? "n/a" : ok ? yes : no));
+    return s;
+  }
+
+  // ------------------------------------------------------------------ Chart.js setup
+  const charts = {};
+  function setChartDefaults() {
+    if (!window.Chart) return;
+    Chart.defaults.font.family = 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = css("--axis-muted");
+    Chart.defaults.borderColor = css("--grid");
+    Chart.defaults.animation = { duration: 250 };
+    Chart.defaults.maintainAspectRatio = false;
+    Chart.defaults.plugins.legend.display = false;
+    const tp = Chart.defaults.plugins.tooltip;
+    tp.backgroundColor = css("--surface-raised");
+    tp.titleColor = css("--text-secondary");
+    tp.bodyColor = css("--text-primary");
+    tp.borderColor = css("--border");
+    tp.borderWidth = 1;
+    tp.padding = 10;
+    tp.cornerRadius = 8;
+    tp.titleFont = { weight: "500", size: 12 };
+    tp.bodyFont = { weight: "600", size: 13 };
+    tp.boxWidth = 12; tp.boxHeight = 3; tp.boxPadding = 6;
+    tp.usePointStyle = false;
+  }
+
+  // direct labels, used sparingly (last point of a line, the tip of a few bars)
+  const directLabels = {
+    id: "directLabels",
+    afterDatasetsDraw(chart, _args, opts) {
+      if (!opts || !opts.items) return;
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = "600 12px " + Chart.defaults.font.family;
+      ctx.fillStyle = css("--text-secondary");
+      for (const it of opts.items(chart)) {
+        const meta = chart.getDatasetMeta(it.ds);
+        if (meta.hidden) continue;
+        const p = meta.data[it.i];
+        if (!p) continue;
+        const pos = it.pos || "top";
+        if (pos === "right") { ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(it.text, p.x + 8, p.y + (it.dy || 0)); }
+        else if (pos === "below") { ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(it.text, p.x + 8, p.y + 6); }
+        else if (pos === "end") { ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(it.text, p.x + 6, p.y); }
+        else { ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(it.text, p.x, p.y - 6); }
+      }
+      ctx.restore();
+    },
+  };
+
+  function makeChart(id, config, aria) {
+    if (charts[id]) charts[id].destroy();
+    const cv = $(id);
+    if (aria) cv.setAttribute("aria-label", aria);
+    if (!window.Chart) return;
+    config.plugins = (config.plugins || []).concat(directLabels);
+    charts[id] = new Chart(cv, config);
+  }
+
+  // category axis for horizontal bars: full label, or a short form when the chart is narrow
+  const SHORT = {
+    "Professional services": "Prof. services", "Negative amount (not a reversal)": "Negative amount",
+    "Robust: ≥3 tx ≥ 25× median": "Robust (median)", "Naive: z-score > 3": "Naive (3σ)", "Injected (ground truth)": "Ground truth",
+  };
+  const catAxis = () => ({
+    grid: { display: false }, border: { color: css("--baseline") },
+    ticks: { color: css("--text-secondary"), autoSkip: false,
+      callback(v) { const l = this.getLabelForValue(v); return this.chart.width < 480 && SHORT[l] ? SHORT[l] : l; } },
+  });
+  const axisY = (fmt, extra = {}) => ({
+    beginAtZero: true, border: { display: false }, grid: { color: css("--grid"), drawTicks: false },
+    ticks: { callback: fmt, padding: 8, maxTicksLimit: 6, color: css("--axis-muted") }, ...extra,
+  });
+  const axisX = (extra = {}) => ({
+    grid: { display: false }, border: { color: css("--baseline") },
+    ticks: { color: css("--axis-muted"), maxRotation: 0, autoSkipPadding: 10 }, ...extra,
+  });
+  const barStyle = (color) => ({
+    backgroundColor: color, hoverBackgroundColor: color, borderRadius: 4, borderSkipped: "start",
+    maxBarThickness: 24, categoryPercentage: 0.8, barPercentage: 0.9,
+  });
+
+  // ------------------------------------------------------------------ state
+  let D = null;
+  const state = { pais: "Todos", seg: "Todos" };
+
+  function sliceKey() { return state.pais + "|" + state.seg; }
+
+  // ------------------------------------------------------------------ KPIs
+  function sparkline(values) {
+    const w = 200, h = 40, pad = 4;
+    const max = Math.max(...values), min = Math.min(...values);
+    const x = (i) => pad + (i * (w - 2 * pad)) / (values.length - 1);
+    const y = (v) => h - pad - ((v - min) / (max - min || 1)) * (h - 2 * pad);
+    const pts = values.map((v, i) => x(i).toFixed(1) + "," + y(v).toFixed(1));
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("class", "spark");
+    svg.setAttribute("aria-hidden", "true");
+    const area = document.createElementNS(ns, "polygon");
+    area.setAttribute("points", `${x(0)},${h} ${pts.join(" ")} ${x(values.length - 1)},${h}`);
+    area.setAttribute("fill", css("--accent-wash"));
+    const line = document.createElementNS(ns, "polyline");
+    line.setAttribute("points", pts.join(" "));
+    line.setAttribute("fill", "none");
+    line.setAttribute("stroke", css("--accent"));
+    line.setAttribute("stroke-width", "2");
+    line.setAttribute("vector-effect", "non-scaling-stroke");
+    line.setAttribute("stroke-linejoin", "round");
+    svg.append(area, line);
+    return svg;
+  }
+
+  function renderKpis(S) {
+    const k = S.kpis, m = S.mensual;
+    const first = m[0].volumen_usd, last = m[m.length - 1].volumen_usd;
+    const prev = m[m.length - 2];
+    const lastApr = m[m.length - 1].tasa_aprobacion_pct;
+    const tiles = [
+      { label: "Approved volume (12 months)", value: usd(k.volumen_usd), hero: true,
+        delta: [null, `${mlab(m[0].mes)} → ${mlab(m[m.length - 1].mes)}: ${usd(first)} → ${usd(last)} per month`], spark: m.map((x) => x.volumen_usd) },
+      { label: "Approved tx", value: nf0.format(k.tx_aprobadas), delta: [null, `of ${nf0.format(k.tx_limpias)} clean rows`], spark: m.map((x) => x.tx_aprobadas) },
+      { label: "Average ticket", value: usd2(k.ticket_prom_usd), delta: [null, `median ${usd2(k.ticket_mediano_usd)} (skewed)`], spark: m.map((x) => x.ticket_prom_usd || 0) },
+      { label: "Approval rate", value: pct(k.tasa_aprobacion_pct), delta: [null, `${pct(lastApr)} in ${mlab(m[m.length - 1].mes)}`], spark: m.map((x) => x.tasa_aprobacion_pct || 0) },
+      { label: `Active clients · ${MONTHS[+k.ult_mes.slice(5, 7) - 1]}`, value: nf0.format(k.clientes_activos_ult_mes),
+        delta: [null, `${nf0.format(k.clientes_activos_total)} over 12 months`], spark: m.map((x) => x.clientes_activos) },
+      { label: `MoM growth · ${MONTHS[+k.ult_mes.slice(5, 7) - 1]}`, value: (k.crecimiento_mom_pct >= 0 ? "+" : "") + pct(k.crecimiento_mom_pct),
+        delta: [k.crecimiento_mom_pct, `${usd(prev.volumen_usd)} → ${usd(k.volumen_ult_mes_usd)}`] },
+    ];
+    const box = $("kpis");
+    box.replaceChildren();
+    for (const t of tiles) {
+      const d = el("div", { class: "kpi" + (t.hero ? " hero" : "") });
+      d.appendChild(el("div", { class: "label" }, t.label));
+      d.appendChild(el("div", { class: "value" }, t.value));
+      const dl = el("div", { class: "delta" });
+      if (t.delta[0] != null) {
+        const up = t.delta[0] >= 0;
+        dl.appendChild(el("b", { class: up ? "up" : "down" }, up ? "▲ " : "▼ "));
+      }
+      dl.appendChild(document.createTextNode(t.delta[1]));
+      d.appendChild(dl);
+      if (t.spark) d.appendChild(sparkline(t.spark));
+      box.appendChild(d);
+    }
+  }
+
+  // ------------------------------------------------------------------ Overview
+  function renderOverview(S) {
+    const m = S.mensual, labels = m.map((x) => mlab(x.mes));
+    const first = m[0].volumen_usd, last = m[m.length - 1].volumen_usd;
+    const growth = last / first;
+    $("t-vol").textContent = `Monthly approved volume grew ${growth.toFixed(1)}× in 12 months, to ${usd(last)} in ${mlong(m[m.length - 1].mes)}`;
+    makeChart("c-vol", {
+      type: "bar",
+      data: { labels, datasets: [{ label: "Approved volume", data: m.map((x) => x.volumen_usd), ...barStyle(css("--s1")) }] },
+      options: {
+        layout: { padding: { top: 22, right: 12 } },
+        scales: { y: axisY((v) => usd(v)), x: axisX() },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => " " + usdFull(c.raw) + " approved" } },
+          directLabels: { items: () => [{ ds: 0, i: 0, text: usd(first) }, { ds: 0, i: m.length - 1, text: usd(last) }] },
+        },
+      },
+    }, $("t-vol").textContent);
+    table($("tv-vol"), [
+      { h: "Month", f: (r) => mlong(r.mes) }, { h: "Approved volume", num: 1, f: (r) => usdFull(r.volumen_usd) },
+      { h: "Approved tx", num: 1, f: (r) => nf0.format(r.tx_aprobadas) }, { h: "Avg ticket", num: 1, f: (r) => usd2(r.ticket_prom_usd) },
+      { h: "MoM", num: 1, f: (r) => r.crecimiento_mom_pct == null ? "–" : (r.crecimiento_mom_pct > 0 ? "+" : "") + pct(r.crecimiento_mom_pct) },
+      { h: "Active clients", num: 1, f: (r) => nf0.format(r.clientes_activos) },
+    ], m);
+
+    // volume by segment (lines, fixed color per segment)
+    const segs = Object.keys(S.mensual_por_segmento).filter((s) => S.mensual_por_segmento[s].some((v) => v > 0));
+    const order = ["Corporativo", "PyME", "Startup"].filter((s) => segs.includes(s));
+    const tot = S.por_segmento.reduce((a, b) => a + b.volumen_usd, 0);
+    const topSeg = S.por_segmento.slice().sort((a, b) => b.volumen_usd - a.volumen_usd)[0];
+    if (order.length > 1) {
+      const sv = S.mensual_por_segmento[topSeg.nombre];
+      const g = sv[sv.length - 1] / sv[0];
+      $("t-segm").textContent = `${lab(topSeg.nombre)} clients drive ${pct(100 * topSeg.volumen_usd / tot, 0)} of volume and grew ${g.toFixed(1)}×`;
+    } else {
+      const sv = S.mensual_por_segmento[order[0]];
+      $("t-segm").textContent = `${lab(order[0])} volume grew ${(sv[sv.length - 1] / sv[0]).toFixed(1)}× over the period`;
+    }
+    const lg = $("lg-segm"); lg.replaceChildren();
+    order.forEach((s) => { const sp = el("span"); sp.appendChild(el("i", { style: `background:${css(SEG_SLOT[s])}` })); sp.appendChild(document.createTextNode(lab(s))); lg.appendChild(sp); });
+    makeChart("c-segm", {
+      type: "line",
+      data: { labels, datasets: order.map((s) => ({
+        label: lab(s), data: S.mensual_por_segmento[s], borderColor: css(SEG_SLOT[s]), backgroundColor: css(SEG_SLOT[s]),
+        borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHoverBorderWidth: 2, pointHoverBorderColor: css("--surface"),
+        tension: 0.25, borderJoinStyle: "round", borderCapStyle: "round",
+      })) },
+      options: {
+        layout: { padding: { right: 84 } },
+        scales: { y: axisY((v) => usd(v)), x: axisX({ ticks: { color: css("--axis-muted"), maxRotation: 0, autoSkip: true, maxTicksLimit: 6 } }) },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => ` ${usdFull(c.raw)}  ${c.dataset.label}` } },
+          directLabels: { items: () => order.map((s, i) => ({ ds: i, i: labels.length - 1, pos: "right", text: lab(s) })) },
+        },
+      },
+    }, $("t-segm").textContent);
+    table($("tv-segm"), [{ h: "Month", f: (r) => mlong(r.mes) }].concat(order.map((s) => ({ h: lab(s), num: 1, f: (r) => usdFull(S.mensual_por_segmento[s][r.i]) }))),
+      m.map((x, i) => ({ mes: x.mes, i })));
+
+    // approval rate
+    const ar = m.map((x) => x.tasa_aprobacion_pct);
+    const lo = Math.min(...ar), hi = Math.max(...ar);
+    $("t-appr").textContent = hi - lo < 2
+      ? `Approval rate is stable: ${pct(lo)} to ${pct(hi)} every month`
+      : `Approval rate swings between ${pct(lo)} and ${pct(hi)} (small sample in this slice)`;
+    makeChart("c-appr", {
+      type: "line",
+      data: { labels, datasets: [{ label: "Approval rate", data: ar, borderColor: css("--s1"), backgroundColor: css("--s1"),
+        borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHoverBorderWidth: 2, pointHoverBorderColor: css("--surface"), tension: 0.25 }] },
+      options: {
+        layout: { padding: { right: 46, top: 8 } },
+        scales: { y: axisY((v) => v + "%", { beginAtZero: false, suggestedMin: Math.floor(lo - 2), suggestedMax: Math.ceil(hi + 1) }), x: axisX({ ticks: { color: css("--axis-muted"), maxRotation: 0, maxTicksLimit: 6 } }) },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => " " + pct(c.raw, 1) + " approved" } },
+          directLabels: { items: () => [{ ds: 0, i: ar.length - 1, pos: "right", text: pct(ar[ar.length - 1]) }] },
+        },
+      },
+    }, $("t-appr").textContent);
+    table($("tv-appr"), [
+      { h: "Month", f: (r) => mlong(r.mes) }, { h: "Approval rate", num: 1, f: (r) => pct(r.tasa_aprobacion_pct, 1) },
+      { h: "Approved", num: 1, f: (r) => nf0.format(r.tx_aprobadas) }, { h: "All cleaned", num: 1, f: (r) => nf0.format(r.tx_limpias) },
+    ], m);
+
+    // day of month: emphasis on days 26-31
+    const dm = S.dia_del_mes;
+    const end = dm.filter((d) => d.dia >= 26), rest = dm.filter((d) => d.dia < 26);
+    const avg = (a) => a.reduce((s, d) => s + d.indice, 0) / a.length;
+    const lift = avg(end) / avg(rest) - 1;
+    $("t-dom").textContent = `Month-end spike: days 26–31 run ${pct(100 * lift, 0)} above the rest of the month`;
+    makeChart("c-dom", {
+      type: "bar",
+      data: { labels: dm.map((d) => d.dia), datasets: [{ label: "Index", data: dm.map((d) => d.indice),
+        backgroundColor: dm.map((d) => d.dia >= 26 ? css("--s1") : css("--deemph")),
+        hoverBackgroundColor: dm.map((d) => d.dia >= 26 ? css("--s1") : css("--axis-muted")),
+        borderRadius: 3, borderSkipped: "start", maxBarThickness: 14, categoryPercentage: 0.85, barPercentage: 0.9 }] },
+      options: {
+        scales: { y: axisY((v) => v), x: axisX({ ticks: { color: css("--axis-muted"), maxRotation: 0, autoSkip: true, maxTicksLimit: 11 } }) },
+        interaction: { mode: "index", intersect: false },
+        plugins: { tooltip: { callbacks: {
+          title: (c) => "Day " + c[0].label,
+          label: (c) => ` Index ${nf1.format(c.raw)} · ${nf1.format(dm[c.dataIndex].tx_prom_diario)} tx/day` } } },
+      },
+    }, $("t-dom").textContent);
+    table($("tv-dom"), [
+      { h: "Day", k: "dia" }, { h: "Index (avg = 100)", num: 1, f: (r) => nf1.format(r.indice) },
+      { h: "Avg tx per day", num: 1, f: (r) => nf1.format(r.tx_prom_diario) }, { h: "Approved tx", num: 1, f: (r) => nf0.format(r.tx) },
+    ], dm);
+  }
+
+  // ------------------------------------------------------------------ Segments & Pareto
+  function hbar(id, rows, color, aria, opts = {}) {
+    makeChart(id, {
+      type: "bar",
+      data: { labels: rows.map((r) => lab(r.nombre)), datasets: [{ label: "Volume", data: rows.map((r) => r.volumen_usd), ...barStyle(color) }] },
+      options: {
+        indexAxis: "y",
+        layout: { padding: { right: 80 } },
+        scales: {
+          x: axisY((v) => usd(v), { ticks: { display: false }, grid: { color: css("--grid"), drawTicks: false } }),
+          y: catAxis(),
+        },
+        interaction: { mode: "index", intersect: false, axis: "y" },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => ` ${usdFull(c.raw)} · ${pct(rows[c.dataIndex].participacion_pct)} of volume` } },
+          directLabels: { items: () => rows.map((r, i) => ({ ds: 0, i, pos: "end", text: `${usd(r.volumen_usd)} · ${pct(r.participacion_pct, 0)}` })) },
+        },
+        ...opts,
+      },
+    }, aria);
+  }
+
+  function renderSegments(S) {
+    // segment: share of volume vs share of clients (grouped bars, 2 series, legend above)
+    const segs = S.por_segmento;
+    const totCli = segs.reduce((a, b) => a + b.clientes, 0);
+    const top = segs.slice().sort((a, b) => b.volumen_usd - a.volumen_usd)[0];
+    $("t-seg").textContent = segs.length > 1
+      ? `${lab(top.nombre)} clients are ${pct(100 * top.clientes / totCli, 0)} of the base but ${pct(top.participacion_pct, 0)} of volume`
+      : `${lab(top.nombre)}: ${nf0.format(top.clientes)} active clients, ${usd2(top.ticket_prom_usd)} average ticket`;
+    makeChart("c-seg", {
+      type: "bar",
+      data: { labels: segs.map((s) => lab(s.nombre)), datasets: [
+        { label: "Share of volume", data: segs.map((s) => s.participacion_pct), ...barStyle(css("--s1")) },
+        { label: "Share of clients", data: segs.map((s) => 100 * s.clientes / totCli), ...barStyle(css("--deemph")) },
+      ] },
+      options: {
+        indexAxis: "y",
+        layout: { padding: { right: 44 } },
+        scales: {
+          x: axisY((v) => v + "%", { max: 100, ticks: { display: false }, grid: { color: css("--grid"), drawTicks: false } }),
+          y: catAxis(),
+        },
+        interaction: { mode: "index", intersect: false, axis: "y" },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => ` ${pct(c.raw)}  ${c.dataset.label}` } },
+          directLabels: { items: () => segs.flatMap((s, i) => [
+            { ds: 0, i, pos: "end", text: pct(s.participacion_pct, 0) },
+            { ds: 1, i, pos: "end", text: pct(100 * s.clientes / totCli, 0) }]) },
+        },
+      },
+    }, $("t-seg").textContent);
+    table($("tv-seg"), [
+      { h: "Segment", f: (r) => lab(r.nombre) }, { h: "Volume", num: 1, f: (r) => usdFull(r.volumen_usd) },
+      { h: "Share of volume", num: 1, f: (r) => pct(r.participacion_pct) }, { h: "Active clients", num: 1, f: (r) => nf0.format(r.clientes) },
+      { h: "Share of clients", num: 1, f: (r) => pct(100 * r.clientes / totCli) }, { h: "Avg ticket", num: 1, f: (r) => usd2(r.ticket_prom_usd) },
+      { h: "Volume per client", num: 1, f: (r) => usdFull(r.volumen_usd / r.clientes) },
+    ], segs);
+
+    // Pareto
+    const P = S.pareto;
+    const u80 = P.umbrales["80"];
+    $("t-par").textContent = `${pct(u80.pct_clientes)} of clients (${u80.clientes} of ${P.n_clientes}) generate 80% of volume`;
+    const pts = P.puntos.map(([x, y]) => ({ x, y }));
+    makeChart("c-par", {
+      type: "scatter",
+      data: { datasets: [
+        { label: "Cumulative share of volume", data: pts, showLine: true, borderColor: css("--s1"), backgroundColor: css("--accent-wash"),
+          fill: "origin", borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHoverBorderWidth: 2, pointHoverBorderColor: css("--surface"), tension: 0 },
+        { label: "Equal share", data: [{ x: 0, y: 0 }, { x: 100, y: 100 }], showLine: true, borderColor: css("--baseline"), borderWidth: 1,
+          pointRadius: 0, pointHoverRadius: 0, fill: false },
+        { label: "80% mark", data: [{ x: u80.pct_clientes, y: 80 }], pointRadius: 5, pointHoverRadius: 6, backgroundColor: css("--s1"),
+          borderColor: css("--surface"), borderWidth: 2 },
+      ] },
+      options: {
+        scales: {
+          x: { type: "linear", min: 0, max: 100, grid: { display: false }, border: { color: css("--baseline") },
+            ticks: { callback: (v) => v + "%", stepSize: 20, color: css("--axis-muted") }, title: { display: true, text: "Share of clients (ranked by spend)", color: css("--axis-muted") } },
+          y: axisY((v) => v + "%", { max: 100 }),
+        },
+        interaction: { mode: "nearest", intersect: false, axis: "x" },
+        plugins: {
+          tooltip: { filter: (c) => c.datasetIndex !== 1, callbacks: {
+            title: () => "",
+            label: (c) => ` Top ${pct(c.raw.x, 0)} of clients → ${pct(c.raw.y)} of volume` } },
+          directLabels: { items: () => [{ ds: 2, i: 0, pos: "below", text: `${pct(u80.pct_clientes)} of clients → 80%` }] },
+        },
+      },
+    }, $("t-par").textContent);
+    table($("tv-par"), [
+      { h: "Share of volume", f: (r) => r.u + "%" }, { h: "Clients needed", num: 1, f: (r) => nf0.format(r.clientes) },
+      { h: "Share of clients", num: 1, f: (r) => pct(r.pct_clientes) },
+    ], Object.entries(P.umbrales).map(([u, v]) => ({ u, ...v })));
+
+    // category & country
+    const cats = S.por_categoria;
+    const top3 = cats.slice(0, 3).reduce((a, b) => a + b.participacion_pct, 0);
+    $("t-cat").textContent = `${lab(cats[0].nombre)} leads at ${pct(cats[0].participacion_pct, 0)}; the top 3 categories are ${pct(top3, 0)} of spend`;
+    hbar("c-cat", cats, css("--s1"), $("t-cat").textContent);
+    table($("tv-cat"), [
+      { h: "Category", f: (r) => lab(r.nombre) }, { h: "Volume", num: 1, f: (r) => usdFull(r.volumen_usd) },
+      { h: "Share", num: 1, f: (r) => pct(r.participacion_pct) }, { h: "Transactions", num: 1, f: (r) => nf0.format(r.tx) },
+      { h: "Avg ticket", num: 1, f: (r) => usd2(r.ticket_prom_usd) },
+    ], cats);
+
+    const ps = S.por_pais;
+    $("t-pais").textContent = ps.length > 1
+      ? `${lab(ps[0].nombre)} is ${pct(ps[0].participacion_pct, 0)} of volume; ${lab(ps[ps.length - 1].nombre)} has the lowest ticket`
+      : `${lab(ps[0].nombre)}: ${usd(ps[0].volumen_usd)} from ${nf0.format(ps[0].clientes)} clients`;
+    if (ps.length > 1) {
+      const lowT = ps.slice().sort((a, b) => a.ticket_prom_usd - b.ticket_prom_usd)[0];
+      $("t-pais").textContent = `${lab(ps[0].nombre)} is ${pct(ps[0].participacion_pct, 0)} of volume; ${lab(lowT.nombre)} has the lowest average ticket (${usd2(lowT.ticket_prom_usd)})`;
+    }
+    hbar("c-pais", ps, css("--s1"), $("t-pais").textContent);
+    table($("tv-pais"), [
+      { h: "Country", f: (r) => lab(r.nombre) }, { h: "Volume", num: 1, f: (r) => usdFull(r.volumen_usd) },
+      { h: "Share", num: 1, f: (r) => pct(r.participacion_pct) }, { h: "Active clients", num: 1, f: (r) => nf0.format(r.clientes) },
+      { h: "Avg ticket", num: 1, f: (r) => usd2(r.ticket_prom_usd) },
+    ], ps);
+  }
+
+  // ------------------------------------------------------------------ Retention
+  function hexLum(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+
+  function renderRetention(S) {
+    const C = S.cohortes;
+    const ramp = css("--seq").split(",").map((s) => s.trim());
+    const vals = C.filas.flatMap((f) => f.retencion_pct.slice(1)).filter((v) => v != null);
+    const lo = Math.min(50, Math.floor((Math.min(...vals, 100)) / 10) * 10);
+    const color = (v) => ramp[Math.max(0, Math.min(ramp.length - 1, Math.round(((v - lo) / (100 - lo)) * (ramp.length - 1))))];
+    const maxK = Math.max(...C.filas.map((f) => f.retencion_pct.filter((v) => v != null).length)) - 1;
+
+    const t = $("heat");
+    t.replaceChildren();
+    const hr = el("tr");
+    hr.appendChild(el("th", { class: "row", scope: "col" }, "Cohort"));
+    hr.appendChild(el("th", { scope: "col", style: "text-align:right" }, "Clients"));
+    for (let k = 0; k <= maxK; k++) hr.appendChild(el("th", { scope: "col" }, "M" + k));
+    t.appendChild(el("thead")).appendChild(hr);
+    const tb = el("tbody");
+    const tip = $("tip");
+    for (const f of C.filas) {
+      const tr = el("tr");
+      tr.appendChild(el("th", { class: "row", scope: "row" }, mlab(f.cohorte)));
+      tr.appendChild(el("td", { class: "size" }, nf0.format(f.clientes)));
+      for (let k = 0; k <= maxK; k++) {
+        const v = f.retencion_pct[k];
+        if (v == null) { tr.appendChild(el("td", { class: "empty" })); continue; }
+        const bg = color(v);
+        const ink = hexLum(bg) > 0.36 ? "#0b0b0b" : "#ffffff";
+        const td = el("td", { style: `background:${bg};color:${ink}`, tabindex: "0",
+          "aria-label": `Cohort ${mlong(f.cohorte)}, month ${k}: ${pct(v)} active` }, nf0.format(v));
+        const show = (ev) => {
+          tip.replaceChildren(el("b", {}, pct(v)), el("span", {}, `${mlong(f.cohorte)} cohort · month ${k}`), el("br"),
+            el("span", {}, `${nf0.format(Math.round(v * f.clientes / 100))} of ${nf0.format(f.clientes)} clients active`));
+          const r = (ev.currentTarget || td).getBoundingClientRect();
+          tip.style.left = Math.min(window.innerWidth - 220, Math.max(8, r.left + r.width / 2 - 100)) + "px";
+          tip.style.top = (r.top - 70 < 8 ? r.bottom + 8 : r.top - 70) + "px";
+          tip.style.opacity = 1;
+        };
+        td.addEventListener("pointerenter", show);
+        td.addEventListener("focus", show);
+        td.addEventListener("pointerleave", () => (tip.style.opacity = 0));
+        td.addEventListener("blur", () => (tip.style.opacity = 0));
+        tr.appendChild(td);
+      }
+      tb.appendChild(tr);
+    }
+    t.appendChild(tb);
+
+    // scale legend
+    const sc = $("heat-scale");
+    sc.replaceChildren(el("span", {}, lo + "%"));
+    const rp = el("span", { class: "ramp", "aria-hidden": "true" });
+    ramp.forEach((c) => rp.appendChild(el("span", { style: `background:${c}` })));
+    sc.append(rp, el("span", {}, "100% of cohort active"));
+    $("coh-note").textContent = `${nf0.format(C.clientes_en_cohortes)} clients onboarded inside the data window (older clients are excluded: their true first month is not observable). M0 is 100% by definition; empty cells are months not observed yet. The average curve omits months with fewer than ${C.min_elegibles} eligible clients.`;
+
+    // weighted average curve
+    const w = C.promedio_ponderado_pct;
+    const ks = w.map((v, k) => ({ k, v })).filter((d) => d.v != null);
+    const pick = ks.find((d) => d.k === 6) || ks[ks.length - 1];
+    const enough = ks.length > 2;
+    $("t-coh").textContent = enough && pick
+      ? `${pct(pick.v, 0)} of clients are still transacting ${pick.k} months after their first purchase`
+      : `Cohort retention for ${nf0.format(C.filas.reduce((a, f) => a + f.clientes, 0))} clients (small slice: read per cohort)`;
+    const lastK = enough ? ks[ks.length - 1] : null;
+    $("t-ret").textContent = lastK
+      ? `Retention decays gradually to ${pct(lastK.v, 0)} by month ${lastK.k}`
+      : "Too few clients in this slice for a reliable average (needs ≥ 30 eligible per month)";
+    makeChart("c-ret", {
+      type: "line",
+      data: { labels: ks.map((d) => "M" + d.k), datasets: [{ label: "Weighted retention", data: ks.map((d) => d.v), borderColor: css("--s1"),
+        backgroundColor: css("--accent-wash"), fill: "origin", borderWidth: 2, pointRadius: 0, pointHoverRadius: 5,
+        pointHoverBorderWidth: 2, pointHoverBorderColor: css("--surface"), tension: 0.2 }] },
+      options: {
+        layout: { padding: { right: 40, top: 8 } },
+        scales: { y: axisY((v) => v + "%", { max: 100 }), x: axisX({ title: { display: true, text: "Months since first approved transaction", color: css("--axis-muted") } }) },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => " " + pct(c.raw) + " still active" } },
+          directLabels: { items: () => lastK ? [{ ds: 0, i: ks.length - 1, pos: "right", text: pct(lastK.v, 0) }] : [] },
+        },
+      },
+    }, $("t-ret").textContent);
+    table($("tv-ret"), [{ h: "Month", f: (r) => "M" + r.k }, { h: "Weighted retention", num: 1, f: (r) => pct(r.v) }], ks);
+  }
+
+  // ------------------------------------------------------------------ Data quality (global)
+  function renderQuality() {
+    const Q = D.calidad;
+    const removed = Q.problemas.filter((p) => p.filas > 0 && !/^Tarjetas sin/i.test(p.problema));
+    const zero = Q.problemas.filter((p) => p.filas === 0);
+    const other = Q.problemas.filter((p) => p.filas > 0 && /^Tarjetas sin/i.test(p.problema));
+    $("t-dq").textContent = `${pct(Q.pct_utilizable, 1)} of raw rows are usable after ${removed.length} cleaning rules; duplicates are the largest defect`;
+    const st = $("dq-stats"); st.replaceChildren();
+    [["Raw rows", nf0.format(Q.filas_crudas), "transacciones table"], ["Clean rows", nf0.format(Q.filas_limpias), "transacciones_limpias view"],
+     ["Removed", nf0.format(Q.filas_descartadas), pct(100 - Q.pct_utilizable, 2) + " of raw rows"]].forEach(([a, b, c]) => {
+      const d = el("div", { class: "stat" });
+      d.append(el("div", { class: "label" }, a), el("div", { class: "value" }, b), el("div", { class: "hint" }, c));
+      st.appendChild(d);
+    });
+    const rows = removed.map((p) => ({ nombre: qlab(p.problema), volumen_usd: p.filas, participacion_pct: p.pct }));
+    makeChart("c-dq", {
+      type: "bar",
+      data: { labels: rows.map((r) => r.nombre), datasets: [{ label: "Rows", data: rows.map((r) => r.volumen_usd), ...barStyle(css("--s1")) }] },
+      options: {
+        indexAxis: "y",
+        layout: { padding: { right: 96 } },
+        scales: {
+          x: axisY((v) => nf0.format(v), { ticks: { display: false }, grid: { color: css("--grid"), drawTicks: false } }),
+          y: catAxis(),
+        },
+        interaction: { mode: "index", intersect: false, axis: "y" },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => ` ${nf0.format(c.raw)} rows · ${nf1.format(rows[c.dataIndex].participacion_pct)}% of raw` } },
+          directLabels: { items: () => rows.map((r, i) => ({ ds: 0, i, pos: "end", text: `${nf0.format(r.volumen_usd)} · ${r.participacion_pct.toFixed(2)}%` })) },
+        },
+      },
+    }, $("t-dq").textContent);
+    table($("tv-dq"), [{ h: "Issue", k: "nombre" }, { h: "Rows", num: 1, f: (r) => nf0.format(r.volumen_usd) }, { h: "% of raw", num: 1, f: (r) => r.participacion_pct.toFixed(3) + "%" }], rows);
+
+    const ul = $("dq-checks"); ul.replaceChildren();
+    zero.forEach((p) => { const li = el("li"); li.innerHTML = ICON_OK; li.firstChild.style.color = css("--up"); li.appendChild(document.createTextNode(qlab(p.problema))); ul.appendChild(li); });
+    const co = $("dq-callout"); co.replaceChildren();
+    co.append(el("b", {}, "Detected = injected. "),
+      document.createTextNode(`Every injected defect is caught by its rule (counts match data/INJECTED_ISSUES.md). ` +
+        (other.length ? `${other.map((o) => `${nf0.format(o.filas)} ${qlab(o.problema).toLowerCase()}`).join(", ")} (informational, not removed). ` : "") +
+        `Status mix after cleaning: ${Object.entries(Q.estatus).map(([k, v]) => `${lab(k)} ${nf0.format(v)}`).join(" · ")}.`));
+  }
+
+  // ------------------------------------------------------------------ Fraud (global)
+  function renderFraud() {
+    const A = D.anomalias, sp = A.spikes, gt = A.ground_truth;
+    const truth = gt ? gt.nivel_tarjeta[0].reales : null;
+    $("t-rule").textContent = `A naive 3σ rule flags ${nf0.format(sp.naive.tarjetas_marcadas)} cards; a median-based rule flags ${sp.robusta.tarjetas_marcadas}`;
+    const rows = [
+      { nombre: "Naive: z-score > 3", v: sp.naive.tarjetas_marcadas, c: css("--deemph") },
+      { nombre: "Robust: ≥3 tx ≥ 25× median", v: sp.robusta.tarjetas_marcadas, c: css("--s1") },
+    ];
+    if (truth != null) rows.push({ nombre: "Injected (ground truth)", v: truth, c: css("--s1") });
+    makeChart("c-rule", {
+      type: "bar",
+      data: { labels: rows.map((r) => r.nombre), datasets: [{ label: "Cards flagged", data: rows.map((r) => r.v), ...barStyle(rows.map((r) => r.c)) }] },
+      options: {
+        indexAxis: "y",
+        layout: { padding: { right: 56 } },
+        scales: {
+          x: axisY((v) => nf0.format(v), { ticks: { display: false }, grid: { color: css("--grid"), drawTicks: false } }),
+          y: catAxis(),
+        },
+        interaction: { mode: "index", intersect: false, axis: "y" },
+        plugins: {
+          tooltip: { callbacks: { label: (c) => ` ${nf0.format(c.raw)} cards` } },
+          directLabels: { items: () => rows.map((r, i) => ({ ds: 0, i, pos: "end", text: nf0.format(r.v) + " cards" })) },
+        },
+      },
+    }, $("t-rule").textContent);
+    const co = $("rule-callout"); co.replaceChildren();
+    co.append(el("b", {}, "Why the naive rule fails: "), document.createTextNode(
+      `amounts are log-normal (long right tail) and the spikes themselves inflate each card's mean and standard deviation (masking). ` +
+      `z > 3 marks ${nf0.format(sp.naive.tx_marcadas)} transactions (${pct(sp.naive.pct_tx)} of those evaluated); the median is resistant to both effects.`));
+    table($("tv-rule"), [{ h: "Rule", k: "nombre" }, { h: "Cards flagged", num: 1, f: (r) => nf0.format(r.v) }], rows);
+
+    if (gt) {
+      $("t-gt").textContent = `Robust rule: ${pct(gt.nivel_tarjeta[1].recall_pct, 0)} recall at ${pct(gt.nivel_tarjeta[1].precision_pct, 0)} precision, vs ${pct(gt.nivel_tarjeta[0].precision_pct)} for 3σ`;
+      const r = [...gt.nivel_tarjeta.map((x) => ({ ...x, nivel: "Card" })), ...gt.nivel_transaccion.map((x) => ({ ...x, nivel: "Transaction" }))];
+      table($("gt-table"), [
+        { h: "Rule", k: "regla" }, { h: "Level", k: "nivel" }, { h: "Flagged", num: 1, f: (x) => nf0.format(x.marcadas) },
+        { h: "Real", num: 1, f: (x) => nf0.format(x.reales) }, { h: "Precision", num: 1, f: (x) => pct(x.precision_pct) },
+        { h: "Recall", num: 1, f: (x) => pct(x.recall_pct) },
+      ], r);
+    } else {
+      $("t-gt").textContent = "Ground-truth evaluation";
+      $("gt-table").textContent = "Ground truth file not available in this build (data/anomalias_inyectadas.csv is git-ignored). Run the pipeline locally to score the rules.";
+    }
+
+    const ct = A.card_testing.rafagas;
+    const attempts = ct.reduce((a, b) => a + b.intentos, 0), rej = ct.reduce((a, b) => a + b.rechazados, 0);
+    const avgDur = ct.reduce((a, b) => a + b.duracion_min, 0) / (ct.length || 1);
+    $("t-ct").textContent = `${ct.length} card-testing bursts: ${nf0.format(attempts)} micro-charges in ~${Math.round(avgDur)} minutes each, ${pct(100 * rej / attempts, 0)} declined`;
+    const night = ct.filter((b) => +b.inicio.slice(11, 13) < 6).length;
+    $("ct-sub").textContent = "Rule: ≥ 5 transactions under USD 5 within 10 minutes on the same card" +
+      (ct.length ? ` · ${night === ct.length ? "all" : night + " of " + ct.length} bursts start between midnight and 6 a.m.` : "");
+    table($("ct-table"), [
+      { h: "Card", k: "tarjeta" }, { h: "Start", k: "inicio" }, { h: "Minutes", num: 1, f: (r) => nf1.format(r.duracion_min) },
+      { h: "Attempts", num: 1, k: "intentos" }, { h: "Declined", num: 1, f: (r) => `${r.rechazados} (${pct(r.tasa_rechazo_pct, 0)})` },
+      { h: "Total", num: 1, f: (r) => usd2(r.monto_total_usd) }, { h: "Merchant", k: "comercio" },
+      { h: "Client", f: (r) => `${lab(r.segmento)} · ${lab(r.pais)}` }, { h: "Ground truth", f: (r) => tag(r.confirmada_ground_truth) },
+    ], ct);
+
+    const fp = sp.tarjetas.filter((t) => t.confirmada_ground_truth === false).length;
+    $("t-sp").textContent = `${sp.tarjetas.length} cards with repeated spending spikes` + (gt ? ` — ${sp.tarjetas.length - fp} confirmed, ${fp} are large legitimate purchases to review` : "");
+    table($("sp-table"), [
+      { h: "Card", k: "tarjeta" }, { h: "Client", f: (r) => `${lab(r.segmento)} · ${lab(r.pais)}` },
+      { h: "Card tx", num: 1, f: (r) => nf0.format(r.tx_tarjeta) }, { h: "Spikes", num: 1, k: "tx_marcadas" },
+      { h: "Median ticket", num: 1, f: (r) => usd2(r.mediana_usd) }, { h: "Max × median", num: 1, f: (r) => nf1.format(r.max_veces_mediana) + "×" },
+      { h: "Spike amount", num: 1, f: (r) => usdFull(r.monto_marcado_usd) }, { h: "First → last", f: (r) => `${r.primera} → ${r.ultima}` },
+      { h: "Ground truth", f: (r) => tag(r.confirmada_ground_truth) },
+    ], sp.tarjetas);
+
+    const top = A.top_anomalias;
+    const unflagged = top.filter((t) => !t.tarjeta_marcada_robusta).length;
+    $("t-top").textContent = `Biggest outliers are one-off travel purchases: ${unflagged} of the top ${top.length} come from cards with no repeated pattern`;
+    table($("top-table"), [
+      { h: "Card", k: "tarjeta" }, { h: "Date", k: "fecha" }, { h: "Category", f: (r) => lab(r.categoria) }, { h: "Merchant", k: "comercio" },
+      { h: "Amount", num: 1, f: (r) => usd2(r.monto_usd) }, { h: "Card median", num: 1, f: (r) => usd2(r.mediana_tarjeta_usd) },
+      { h: "× median", num: 1, f: (r) => nf1.format(r.veces_mediana) + "×" }, { h: "z-score", num: 1, f: (r) => nf1.format(r.z_score) },
+      { h: "Robust flag", f: (r) => tag(r.tarjeta_marcada_robusta, "Card flagged", "Single event") },
+    ], top);
+  }
+
+  // ------------------------------------------------------------------ orchestration
+  function renderSliced() {
+    const S = D.slices[sliceKey()];
+    const scope = [state.pais !== "Todos" ? lab(state.pais) : "All countries", state.seg !== "Todos" ? lab(state.seg) : "all segments"].join(" · ");
+    $("scope-note").textContent = `${scope} · ${mlong(D.meta.meses[0])} – ${mlong(D.meta.meses[D.meta.meses.length - 1])} · USD`;
+    $("f-reset").hidden = state.pais === "Todos" && state.seg === "Todos";
+    renderKpis(S);
+    renderOverview(S);
+    renderSegments(S);
+    renderRetention(S);
+  }
+
+  function renderAll() {
+    setChartDefaults();
+    renderSliced();
+    renderQuality();
+    renderFraud();
+  }
+
+  function initFilters() {
+    const fill = (sel, opts, allLabel) => {
+      sel.replaceChildren(el("option", { value: "Todos" }, allLabel));
+      opts.forEach((o) => sel.appendChild(el("option", { value: o }, lab(o))));
+    };
+    fill($("f-pais"), D.filtros.paises, "All countries");
+    fill($("f-seg"), D.filtros.segmentos, "All segments");
+    const fromHash = new URLSearchParams(location.hash.slice(1));
+    if (D.filtros.paises.includes(fromHash.get("country"))) state.pais = fromHash.get("country");
+    if (D.filtros.segmentos.includes(fromHash.get("segment"))) state.seg = fromHash.get("segment");
+    $("f-pais").value = state.pais; $("f-seg").value = state.seg;
+    const onChange = () => {
+      state.pais = $("f-pais").value; state.seg = $("f-seg").value;
+      const p = new URLSearchParams();
+      if (state.pais !== "Todos") p.set("country", state.pais);
+      if (state.seg !== "Todos") p.set("segment", state.seg);
+      history.replaceState(null, "", p.toString() ? "#" + p.toString() : location.pathname);
+      renderSliced();
+    };
+    $("f-pais").addEventListener("change", onChange);
+    $("f-seg").addEventListener("change", onChange);
+    $("f-reset").addEventListener("click", () => { $("f-pais").value = "Todos"; $("f-seg").value = "Todos"; onChange(); });
+  }
+
+  function initTheme() {
+    const btn = $("theme-btn");
+    const order = ["auto", "light", "dark"];
+    let mode = "auto";
+    try { mode = localStorage.getItem("theme") || "auto"; } catch (e) { /* storage unavailable */ }
+    const apply = () => {
+      if (mode === "auto") document.documentElement.removeAttribute("data-theme");
+      else document.documentElement.setAttribute("data-theme", mode);
+      btn.textContent = "Theme: " + mode;
+    };
+    apply();
+    btn.addEventListener("click", () => {
+      mode = order[(order.indexOf(mode) + 1) % order.length];
+      try { localStorage.setItem("theme", mode); } catch (e) { /* ignore */ }
+      apply();
+      if (D) renderAll();
+    });
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (D && mode === "auto") renderAll(); });
+  }
+
+  // fetch JSON (GitHub Pages / local server); fall back to data/dashboard.js when opened from disk (file://)
+  async function loadData() {
+    try {
+      if (location.protocol === "file:") throw new Error("file:// - using data/dashboard.js");
+      const r = await fetch("data/dashboard.json", { cache: "no-cache" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return await r.json();
+    } catch (err) {
+      if (window.__DASHBOARD__) return window.__DASHBOARD__;
+      await new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = "data/dashboard.js"; s.onload = res; s.onerror = () => rej(err);
+        document.head.appendChild(s);
+      });
+      return window.__DASHBOARD__;
+    }
+  }
+
+  async function main() {
+    initTheme();
+    try {
+      D = await loadData();
+    } catch (e) {
+      const app = $("app");
+      app.replaceChildren();
+      const box = el("div", { class: "load-error" });
+      box.append(el("h2", {}, "Could not load dashboard data"),
+        el("p", {}, "Generate it with "), el("p"));
+      box.children[1].appendChild(el("code", {}, "python python/exportar_dashboard.py"));
+      box.children[2].append(document.createTextNode("then serve the folder: "), el("code", {}, "python -m http.server -d docs 8000"));
+      app.appendChild(box);
+      console.warn("Dashboard data not found:", e);
+      return;
+    }
+    $("window-pill").textContent = `${mlong(D.meta.meses[0])} – ${mlong(D.meta.meses[D.meta.meses.length - 1])}`;
+    $("gen-note").textContent = `Data generated ${D.meta.generado_utc.slice(0, 10)} · amounts in USD at fixed FX`;
+    if (!window.Chart) console.warn("Chart.js failed to load; tables are still available under each chart.");
+    initFilters();
+    renderAll();
+    let t;
+    window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => Object.values(charts).forEach((c) => c.resize()), 150); });
+  }
+
+  main();
+})();
+</script>
+</body>
+</html>

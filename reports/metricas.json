@@ -1,0 +1,466 @@
+{
+  "generated_at": "2026-10-15T18:42:54Z",
+  "period": {
+    "start": "2025-10-01",
+    "end": "2026-09-30"
+  },
+  "data_quality": {
+    "raw_transactions": 120267,
+    "clean_transactions": 118951,
+    "removed_transactions": 1316,
+    "removed_pct": 1.094
+  },
+  "volume": {
+    "total_approved_usd": 42499462.0,
+    "approved_transactions": 110673,
+    "first_month": "2025-10",
+    "last_month": "2026-09",
+    "first_month_usd": 2420679.0,
+    "last_month_usd": 5394950.0,
+    "growth_multiple": 2.23,
+    "compound_monthly_growth_pct": 7.56,
+    "avg_mom_growth_pct": 8.0,
+    "active_clients_first_month": 96,
+    "active_clients_last_month": 237,
+    "active_clients_growth_multiple": 2.47,
+    "spend_per_active_client_change_pct": -9.7,
+    "share_of_log_growth_from_clients_pct": 112.8,
+    "monthly": [
+      {
+        "month": "2025-10",
+        "volume_usd": 2420679.0,
+        "transactions": 6625,
+        "approved_transactions": 6170,
+        "active_clients": 96,
+        "mom_growth_pct": null
+      },
+      {
+        "month": "2025-11",
+        "volume_usd": 2345363.0,
+        "transactions": 6464,
+        "approved_transactions": 5993,
+        "active_clients": 108,
+        "mom_growth_pct": -3.11
+      },
+      {
+        "month": "2025-12",
+        "volume_usd": 2842261.0,
+        "transactions": 7692,
+        "approved_transactions": 7170,
+        "active_clients": 122,
+        "mom_growth_pct": 21.19
+      },
+      {
+        "month": "2026-01",
+        "volume_usd": 2906871.0,
+        "transactions": 8242,
+        "approved_transactions": 7676,
+        "active_clients": 130,
+        "mom_growth_pct": 2.27
+      },
+      {
+        "month": "2026-02",
+        "volume_usd": 2645249.0,
+        "transactions": 7371,
+        "approved_transactions": 6857,
+        "active_clients": 143,
+        "mom_growth_pct": -9.0
+      },
+      {
+        "month": "2026-03",
+        "volume_usd": 3172395.0,
+        "transactions": 8907,
+        "approved_transactions": 8304,
+        "active_clients": 166,
+        "mom_growth_pct": 19.93
+      },
+      {
+        "month": "2026-04",
+        "volume_usd": 3228468.0,
+        "transactions": 9403,
+        "approved_transactions": 8768,
+        "active_clients": 180,
+        "mom_growth_pct": 1.77
+      },
+      {
+        "month": "2026-05",
+        "volume_usd": 3924534.0,
+        "transactions": 11284,
+        "approved_transactions": 10476,
+        "active_clients": 199,
+        "mom_growth_pct": 21.56
+      },
+      {
+        "month": "2026-06",
+        "volume_usd": 4254020.0,
+        "transactions": 11800,
+        "approved_transactions": 10954,
+        "active_clients": 215,
+        "mom_growth_pct": 8.4
+      },
+      {
+        "month": "2026-07",
+        "volume_usd": 4605315.0,
+        "transactions": 12820,
+        "approved_transactions": 11908,
+        "active_clients": 218,
+        "mom_growth_pct": 8.26
+      },
+      {
+        "month": "2026-08",
+        "volume_usd": 4759358.0,
+        "transactions": 13361,
+        "approved_transactions": 12467,
+        "active_clients": 236,
+        "mom_growth_pct": 3.34
+      },
+      {
+        "month": "2026-09",
+        "volume_usd": 5394950.0,
+        "transactions": 14982,
+        "approved_transactions": 13930,
+        "active_clients": 237,
+        "mom_growth_pct": 13.35
+      }
+    ]
+  },
+  "client_ramp": {
+    "first_full_month_pct_of_steady_spend": 74.6,
+    "month2_pct_of_steady_spend": 88.1,
+    "active_cards_month0": 1.48,
+    "active_cards_steady": 2.88,
+    "steady_median_monthly_spend_usd": 5447.0,
+    "legacy_clients_spend_per_client_change": 1.044,
+    "pct_active_clients_in_first_3_months_last_month": 21.9
+  },
+  "seasonality": {
+    "days_26_31_vs_mid_month_weekday": 1.374,
+    "days_1_3_vs_mid_month_weekday": 1.071,
+    "day_15_vs_mid_month_weekday": 1.118,
+    "share_tx_days_26_31_pct": 22.94,
+    "calendar_share_days_26_31_pct": 17.81,
+    "weekend_vs_weekday_tx": 0.549
+  },
+  "segments": [
+    {
+      "segment": "Startup",
+      "label": "Startup",
+      "clients": 115,
+      "client_share_pct": 38.33,
+      "spend_usd": 2391909.0,
+      "spend_share_pct": 5.63,
+      "cards_per_client": 2.15,
+      "tx_per_card": 58.4,
+      "mean_ticket_usd": 168.55,
+      "spend_per_client_usd": 21167.0
+    },
+    {
+      "segment": "PyME",
+      "label": "SME",
+      "clients": 128,
+      "client_share_pct": 42.67,
+      "spend_usd": 6082910.0,
+      "spend_share_pct": 14.31,
+      "cards_per_client": 2.63,
+      "tx_per_card": 84.9,
+      "mean_ticket_usd": 212.67,
+      "spend_per_client_usd": 47523.0
+    },
+    {
+      "segment": "Corporativo",
+      "label": "Corporate",
+      "clients": 57,
+      "client_share_pct": 19.0,
+      "spend_usd": 34024643.0,
+      "spend_share_pct": 80.06,
+      "cards_per_client": 5.53,
+      "tx_per_card": 215.5,
+      "mean_ticket_usd": 501.25,
+      "spend_per_client_usd": 596924.0
+    }
+  ],
+  "country_spend_share_pct": {
+    "Mexico": 52.22,
+    "Colombia": 30.22,
+    "Brasil": 17.57
+  },
+  "category_spend_share_pct": {
+    "Viajes": 36.33,
+    "Publicidad": 17.65,
+    "Servicios Profesionales": 17.57,
+    "Software": 12.8,
+    "Logistica": 8.79,
+    "Otros": 2.81,
+    "Oficina": 2.33,
+    "Alimentos": 1.71
+  },
+  "pareto": {
+    "clients_with_spend": 298,
+    "clients_for_50pct": 16,
+    "clients_for_80pct": 49,
+    "clients_for_90pct": 93,
+    "pct_clients_for_80pct": 16.4,
+    "top10_share_pct": 40.0,
+    "gini": 0.778
+  },
+  "activation": {
+    "new_clients": 207,
+    "never_transacted": 2,
+    "median_days_to_first_tx": 22.0,
+    "p75_days_to_first_tx": 42.0,
+    "pct_first_tx_in_signup_month": 37.6,
+    "pct_activated_within_30d": 63.3,
+    "median_days_signup_to_first_card": 19.0
+  },
+  "retention": {
+    "definition": "cohort = month of first approved transaction (clients signed up in window); retention_k = share of cohort with >= 1 approved transaction in month k",
+    "month_1_pct": 99.0,
+    "month_3_pct": 95.4,
+    "month_6_pct": 84.5,
+    "phase1_signup_cohort_definition": {
+      "m0": 37.2,
+      "m1": 77.8,
+      "m3": 98.2,
+      "m6": 86.7
+    },
+    "curve": [
+      {
+        "month": 0,
+        "eligible_clients": 205,
+        "retention_pct": 100.0
+      },
+      {
+        "month": 1,
+        "eligible_clients": 195,
+        "retention_pct": 99.0
+      },
+      {
+        "month": 2,
+        "eligible_clients": 167,
+        "retention_pct": 98.8
+      },
+      {
+        "month": 3,
+        "eligible_clients": 153,
+        "retention_pct": 95.4
+      },
+      {
+        "month": 4,
+        "eligible_clients": 127,
+        "retention_pct": 89.8
+      },
+      {
+        "month": 5,
+        "eligible_clients": 102,
+        "retention_pct": 84.3
+      },
+      {
+        "month": 6,
+        "eligible_clients": 84,
+        "retention_pct": 84.5
+      },
+      {
+        "month": 7,
+        "eligible_clients": 61,
+        "retention_pct": 82.0
+      },
+      {
+        "month": 8,
+        "eligible_clients": 42,
+        "retention_pct": 81.0
+      },
+      {
+        "month": 9,
+        "eligible_clients": 29,
+        "retention_pct": 79.3
+      },
+      {
+        "month": 10,
+        "eligible_clients": 16,
+        "retention_pct": 93.8
+      },
+      {
+        "month": 11,
+        "eligible_clients": 4,
+        "retention_pct": 100.0
+      }
+    ],
+    "min_eligible_clients_for_reliable_point": 30
+  },
+  "ticket_size_usd": {
+    "Startup": {
+      "n": 14191,
+      "mean": 168.55,
+      "median": 96.61,
+      "p90": 371.11,
+      "p99": 1058.52,
+      "skew": 9.53,
+      "skew_log": -0.1,
+      "mean_over_median": 1.74
+    },
+    "SME": {
+      "n": 28603,
+      "mean": 212.67,
+      "median": 113.36,
+      "p90": 481.17,
+      "p99": 1467.04,
+      "skew": 7.34,
+      "skew_log": 0.02,
+      "mean_over_median": 1.88
+    },
+    "Corporate": {
+      "n": 67879,
+      "mean": 501.25,
+      "median": 274.56,
+      "p90": 1121.29,
+      "p99": 3532.36,
+      "skew": 8.71,
+      "skew_log": -0.03,
+      "mean_over_median": 1.83
+    },
+    "All": {
+      "n": 110673,
+      "mean": 384.01,
+      "median": 191.45,
+      "p90": 879.22,
+      "p99": 2947.59,
+      "skew": 9.69,
+      "skew_log": -0.04,
+      "mean_over_median": 2.01
+    }
+  },
+  "anomaly_detection": {
+    "scope": {
+      "transactions": 107020,
+      "cards": 673,
+      "injected_spikes": 32,
+      "injected_spike_cards": 8,
+      "injected_card_testing_tx": 62,
+      "injected_card_testing_cards": 5
+    },
+    "evaluation": [
+      {
+        "method": "Naive z-score > 3 (raw USD, mean/SD)",
+        "level": "transaction",
+        "flagged": 2226,
+        "true_positives": 28,
+        "false_positives": 2198,
+        "false_negatives": 4,
+        "precision": 0.0126,
+        "recall": 0.875,
+        "f1": 0.0248,
+        "flag_rate_pct": 2.08
+      },
+      {
+        "method": "z-score > 3 on log amount (mean/SD)",
+        "level": "transaction",
+        "flagged": 188,
+        "true_positives": 24,
+        "false_positives": 164,
+        "false_negatives": 8,
+        "precision": 0.1277,
+        "recall": 0.75,
+        "f1": 0.2182,
+        "flag_rate_pct": 0.1757
+      },
+      {
+        "method": "Tukey IQR fence (Q3 + 1.5 IQR, log amount)",
+        "level": "transaction",
+        "flagged": 650,
+        "true_positives": 31,
+        "false_positives": 619,
+        "false_negatives": 1,
+        "precision": 0.0477,
+        "recall": 0.9688,
+        "f1": 0.0909,
+        "flag_rate_pct": 0.6074
+      },
+      {
+        "method": "Robust modified z > 3.5 (median/MAD, log amount)",
+        "level": "transaction",
+        "flagged": 106,
+        "true_positives": 23,
+        "false_positives": 83,
+        "false_negatives": 9,
+        "precision": 0.217,
+        "recall": 0.7188,
+        "f1": 0.3333,
+        "flag_rate_pct": 0.099
+      },
+      {
+        "method": "Spikes: card has >= 1 naive 3-sigma flag",
+        "level": "card",
+        "flagged": 648,
+        "true_positives": 8,
+        "false_positives": 640,
+        "false_negatives": 0,
+        "precision": 0.0123,
+        "recall": 1.0,
+        "f1": 0.0244,
+        "flag_rate_pct": 96.2853
+      },
+      {
+        "method": "Spikes: card has >= 2 robust flags",
+        "level": "card",
+        "flagged": 21,
+        "true_positives": 7,
+        "false_positives": 14,
+        "false_negatives": 1,
+        "precision": 0.3333,
+        "recall": 0.875,
+        "f1": 0.4828,
+        "flag_rate_pct": 3.1204
+      },
+      {
+        "method": "Spikes: >= 3 tx at >= 25x card median (sql/06 6.2)*",
+        "level": "card",
+        "flagged": 14,
+        "true_positives": 8,
+        "false_positives": 6,
+        "false_negatives": 0,
+        "precision": 0.5714,
+        "recall": 1.0,
+        "f1": 0.7273,
+        "flag_rate_pct": 2.0802
+      },
+      {
+        "method": "Card testing: >= 5 tx < USD 5 in 10 min",
+        "level": "card",
+        "flagged": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "flag_rate_pct": 0.558
+      },
+      {
+        "method": "Card testing: same burst rule (transactions)",
+        "level": "transaction",
+        "flagged": 62,
+        "true_positives": 62,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "flag_rate_pct": 0.0521
+      }
+    ],
+    "average_precision": {
+      "z_naive": 0.0397,
+      "z_log": 0.5028,
+      "iqr_score": 0.6119,
+      "z_robust": 0.6433
+    },
+    "masking_median_sd_inflation": 2.02,
+    "card_testing_cards_detected": [
+      558,
+      656,
+      672,
+      807,
+      878
+    ]
+  }
+}

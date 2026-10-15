@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-10-15 18:42 UTC",
+  "summary": {
+    "checks_total": 19,
+    "checks_passed": 15,
+    "checks_failed": 4,
+    "critical_failed": 3,
+    "warning_failed": 1,
+    "info_failed": 0,
+    "failed_checks": [
+      "duplicate_transactions",
+      "future_timestamp",
+      "negative_amount_not_reversal",
+      "null_merchant"
+    ],
+    "raw_transactions": 120267,
+    "clean_transactions": 118951,
+    "removed_transactions": 1316,
+    "removed_pct": 1.094
+  },
+  "checks": [
+    {
+      "name": "duplicate_transactions",
+      "description": "Same card, timestamp, amount and merchant under a different transaccion_id (extra copies only).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 598,
+      "population_rows": 120267,
+      "pct": 0.4972,
+      "threshold_pct": 0.1,
+      "passed": false
+    },
+    {
+      "name": "future_timestamp",
+      "description": "fecha_hora after the extraction cut-off (2026-09-30 23:59:59).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 120,
+      "population_rows": 120267,
+      "pct": 0.0998,
+      "threshold_pct": 0.0,
+      "passed": false
+    },
+    {
+      "name": "negative_amount_not_reversal",
+      "description": "Negative amount on an approved/declined row (only reversals may be negative).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 239,
+      "population_rows": 120267,
+      "pct": 0.1987,
+      "threshold_pct": 0.0,
+      "passed": false
+    },
+    {
+      "name": "category_domain",
+      "description": "Merchant category outside the 8 allowed values.",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "client_card_mismatch",
+      "description": "Transaction's cliente_id differs from the owner of its card.",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "currency_domain",
+      "description": "Currency outside the allowed domain (MXN, COP, BRL, USD).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "null_key_fields",
+      "description": "NULL in a mandatory column (tarjeta_id, cliente_id, fecha_hora, monto, moneda, categoria_comercio, estatus).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "orphan_card_client",
+      "description": "Card whose cliente_id does not exist in clientes.",
+      "severity": "critical",
+      "population": "cards",
+      "affected_rows": 0,
+      "population_rows": 900,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "orphan_transaction_card",
+      "description": "Transaction whose tarjeta_id does not exist in tarjetas.",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "orphan_transaction_client",
+      "description": "Transaction whose cliente_id does not exist in clientes.",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "status_domain",
+      "description": "Status outside the allowed domain (aprobada, rechazada, reversada).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "zero_amount",
+      "description": "Amount equal to zero (meaningless for a card payment).",
+      "severity": "critical",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "null_merchant",
+      "description": "Merchant name (comercio) is NULL: the row cannot be attributed or deduplicated.",
+      "severity": "warning",
+      "population": "transactions",
+      "affected_rows": 359,
+      "population_rows": 120267,
+      "pct": 0.2985,
+      "threshold_pct": 0.1,
+      "passed": false
+    },
+    {
+      "name": "currency_country_mismatch",
+      "description": "Currency is neither USD nor the local currency of the client's country.",
+      "severity": "warning",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "reversal_positive_amount",
+      "description": "Reversal recorded with a positive amount (would double-count spend).",
+      "severity": "warning",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "transaction_before_card_issue",
+      "description": "Transaction dated before the card's issue date.",
+      "severity": "warning",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "transaction_before_client_signup",
+      "description": "Transaction dated before the client's signup date.",
+      "severity": "warning",
+      "population": "transactions",
+      "affected_rows": 0,
+      "population_rows": 120267,
+      "pct": 0.0,
+      "threshold_pct": 0.0,
+      "passed": true
+    },
+    {
+      "name": "cards_without_transactions",
+      "description": "Issued cards with no transaction at all (activation gap, not an error).",
+      "severity": "info",
+      "population": "cards",
+      "affected_rows": 4,
+      "population_rows": 900,
+      "pct": 0.4444,
+      "threshold_pct": 5.0,
+      "passed": true
+    },
+    {
+      "name": "clients_without_approved_transactions",
+      "description": "Clients that never completed an approved transaction.",
+      "severity": "info",
+      "population": "clients",
+      "affected_rows": 2,
+      "population_rows": 300,
+      "pct": 0.6667,
+      "threshold_pct": 5.0,
+      "passed": true
+    }
+  ]
+}

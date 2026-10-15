@@ -1,0 +1,5 @@
+# Python >= 3.11 (pandas 3 requirement). Versions pinned to the ones used to build and test the project.
+numpy==2.5.3
+pandas==3.0.5
+matplotlib==3.11.2
+pytest==9.1.1

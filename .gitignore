@@ -1,0 +1,12 @@
+# Datos pesados: solo se versiona la muestra
+data/*.csv
+!data/muestra_transacciones.csv
+data/*.db
+
+__pycache__/
+*.pyc
+.venv/
+
+# reports/*.png NO se ignora (los graficos se versionan)
+
+.pytest_cache/

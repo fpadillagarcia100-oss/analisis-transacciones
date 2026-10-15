@@ -1,0 +1,501 @@
+transaccion_id,tarjeta_id,cliente_id,fecha_hora,monto,moneda,categoria_comercio,comercio,pais_comercio,estatus
+1,594,205,2025-10-01 04:33:25,2771.5,MXN,Oficina,Kalunga,Mexico,aprobada
+2,303,100,2025-10-01 06:10:07,60.24,BRL,Otros,Suscripcion Mensual,Brasil,aprobada
+3,177,61,2025-10-01 06:30:55,108556.0,COP,Otros,Comercio General,Colombia,aprobada
+4,378,128,2025-10-01 07:07:33,391.95,MXN,Alimentos,Rappi,Mexico,aprobada
+5,890,299,2025-10-01 07:15:09,793.04,BRL,Alimentos,Rappi,Brasil,aprobada
+6,368,126,2025-10-01 07:32:28,3283.37,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+7,144,47,2025-10-01 07:32:45,247.66,USD,Viajes,Volaris,Estados Unidos,aprobada
+8,484,163,2025-10-01 07:46:54,282.12,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+9,423,141,2025-10-01 07:55:34,2608.54,MXN,Logistica,DHL,Colombia,aprobada
+10,601,208,2025-10-01 07:59:43,679617.0,COP,Servicios Profesionales,Fiverr,Colombia,aprobada
+11,482,163,2025-10-01 08:01:02,926.99,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+12,611,212,2025-10-01 08:07:19,477214.0,COP,Software,Google Workspace,Colombia,aprobada
+13,36,15,2025-10-01 08:09:31,233.49,USD,Software,AWS,Paises Bajos,aprobada
+14,873,294,2025-10-01 08:10:41,8979.07,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+15,145,47,2025-10-01 08:21:09,2514.52,MXN,Logistica,FedEx,Mexico,aprobada
+16,634,221,2025-10-01 08:21:32,864.09,MXN,Alimentos,Juan Valdez,Mexico,aprobada
+17,601,208,2025-10-01 08:23:40,146922.0,COP,Otros,Tienda en Linea,Colombia,aprobada
+18,555,195,2025-10-01 08:26:49,972.11,MXN,Alimentos,iFood,Mexico,aprobada
+19,142,47,2025-10-01 08:27:46,-16234.14,MXN,Viajes,LATAM Airlines,Mexico,reversada
+20,383,128,2025-10-01 08:34:03,1705.03,USD,Publicidad,Meta Ads,Irlanda,aprobada
+21,890,299,2025-10-01 08:40:59,131.36,USD,Viajes,Booking.com,Estados Unidos,aprobada
+22,60,20,2025-10-01 08:48:07,1151159.0,COP,Viajes,Aeromexico,Colombia,aprobada
+23,60,20,2025-10-01 08:50:58,1015710.0,COP,Servicios Profesionales,Fiverr,Colombia,aprobada
+24,144,47,2025-10-01 08:53:04,879.82,MXN,Oficina,Office Depot,Mexico,aprobada
+25,109,36,2025-10-01 09:03:00,4598.56,MXN,Software,GitHub,Mexico,aprobada
+26,422,141,2025-10-01 09:07:18,204.34,USD,Servicios Profesionales,Consultoria Andina,Irlanda,aprobada
+27,175,61,2025-10-01 09:08:52,421425.0,COP,Alimentos,Rappi,Colombia,aprobada
+28,852,289,2025-10-01 09:09:36,719996.0,COP,Servicios Profesionales,Notaria 14,Peru,rechazada
+29,306,100,2025-10-01 09:14:02,191.52,BRL,Software,Notion,Brasil,aprobada
+30,422,141,2025-10-01 09:14:18,127.72,USD,Viajes,Aeromexico,Irlanda,aprobada
+31,143,47,2025-10-01 09:16:23,1072.21,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+32,834,285,2025-10-01 09:17:50,240671.0,COP,Servicios Profesionales,Toptal,Colombia,aprobada
+33,660,228,2025-10-01 09:18:04,1077613.0,COP,Software,AWS,Colombia,aprobada
+34,142,47,2025-10-01 09:20:23,196.98,USD,Publicidad,X Ads,Estados Unidos,rechazada
+35,497,168,2025-10-01 09:23:12,1128.26,BRL,Software,AWS,Brasil,aprobada
+36,368,126,2025-10-01 09:25:24,1230.95,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+37,60,20,2025-10-01 09:26:16,5235.4,USD,Viajes,LATAM Airlines,Estados Unidos,aprobada
+38,492,167,2025-10-01 09:32:57,355.24,BRL,Publicidad,Meta Ads,Brasil,aprobada
+39,871,294,2025-10-01 09:39:41,95.5,USD,Software,AWS,Irlanda,aprobada
+40,611,212,2025-10-01 09:41:33,4450421.0,COP,Publicidad,Meta Ads,Colombia,aprobada
+41,480,163,2025-10-01 09:42:28,9248.98,MXN,Software,Google Workspace,Mexico,aprobada
+42,852,289,2025-10-01 09:53:44,233276.0,COP,Software,HubSpot,Colombia,aprobada
+43,368,126,2025-10-01 09:54:51,2803.18,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+44,180,61,2025-10-01 09:59:30,413547.0,COP,Viajes,Aeromexico,Colombia,aprobada
+45,425,141,2025-10-01 10:12:01,-11279.07,MXN,Publicidad,Taboola,Peru,reversada
+46,130,43,2025-10-01 10:12:11,684.2,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+47,142,47,2025-10-01 10:16:20,-1851.31,MXN,Software,Atlassian,Colombia,reversada
+48,103,35,2025-10-01 10:32:57,2590.98,MXN,Software,Google Workspace,Mexico,aprobada
+49,377,128,2025-10-01 10:34:18,2887.63,MXN,Publicidad,X Ads,Mexico,aprobada
+50,145,47,2025-10-01 10:37:28,68.92,USD,Viajes,Despegar,Estados Unidos,aprobada
+51,380,128,2025-10-01 10:45:33,74.01,USD,Software,Figma,Estados Unidos,aprobada
+52,613,212,2025-10-01 10:46:17,710050.0,COP,Logistica,DHL,Brasil,aprobada
+53,480,163,2025-10-01 10:49:06,3510.31,MXN,Oficina,Office Depot,Mexico,aprobada
+54,472,159,2025-10-01 10:50:51,285.53,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+55,483,163,2025-10-01 11:06:25,1141.38,USD,Viajes,Aeromexico,Paises Bajos,aprobada
+56,745,255,2025-10-01 11:08:59,216.71,USD,Software,Figma,Estados Unidos,aprobada
+57,422,141,2025-10-01 11:10:13,17358.94,MXN,Publicidad,LinkedIn Ads,Mexico,aprobada
+58,370,126,2025-10-01 11:12:00,1086.76,MXN,Alimentos,Rappi,Mexico,aprobada
+59,500,168,2025-10-01 11:13:37,218.06,BRL,Alimentos,Starbucks,Brasil,aprobada
+60,175,61,2025-10-01 11:15:14,146.14,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+61,145,47,2025-10-01 11:16:30,95.07,USD,Software,Slack,Estados Unidos,aprobada
+62,60,20,2025-10-01 11:17:49,1426082.0,COP,Servicios Profesionales,Deloitte,Colombia,aprobada
+63,177,61,2025-10-01 11:18:13,1365862.0,COP,Publicidad,Meta Ads,Colombia,aprobada
+64,887,299,2025-10-01 11:21:20,1406.61,BRL,Alimentos,Rappi,Brasil,aprobada
+65,499,168,2025-10-01 11:30:51,1544.84,BRL,Servicios Profesionales,Deloitte,Brasil,aprobada
+66,348,118,2025-10-01 11:33:18,176.12,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+67,783,270,2025-10-01 11:36:31,343.86,MXN,Otros,Comercio General,Mexico,aprobada
+68,177,61,2025-10-01 11:36:37,108703.0,COP,Alimentos,Starbucks,Colombia,aprobada
+69,56,20,2025-10-01 11:37:05,106161.0,COP,Alimentos,Rappi,Colombia,aprobada
+70,55,20,2025-10-01 11:41:08,1324482.0,COP,Viajes,Airbnb,Colombia,aprobada
+71,57,20,2025-10-01 11:42:26,2049.84,USD,Viajes,Aeromexico,Estados Unidos,rechazada
+72,175,61,2025-10-01 11:47:14,644080.0,COP,Software,Microsoft 365,Colombia,aprobada
+73,493,167,2025-10-01 11:47:51,166.75,BRL,Oficina,Kalunga,Brasil,aprobada
+74,136,44,2025-10-01 11:58:00,129.76,USD,Software,Slack,Estados Unidos,aprobada
+75,493,167,2025-10-01 11:58:33,188.2,BRL,Alimentos,Uber Eats,Brasil,aprobada
+76,702,241,2025-10-01 12:00:40,193.69,USD,Software,Google Workspace,Estados Unidos,aprobada
+77,840,285,2025-10-01 12:04:41,6762684.0,COP,Viajes,LATAM Airlines,Colombia,aprobada
+78,880,297,2025-10-01 12:24:35,2179.21,BRL,Servicios Profesionales,Deloitte,Brasil,aprobada
+79,370,126,2025-10-01 12:29:11,1855.21,MXN,Oficina,Office Depot,Mexico,rechazada
+80,135,44,2025-10-01 12:32:51,16512.25,MXN,Viajes,Copa Airlines,Mexico,aprobada
+81,479,163,2025-10-01 12:37:59,265.39,USD,Publicidad,TikTok Ads,Estados Unidos,aprobada
+82,667,230,2025-10-01 12:38:27,181.57,USD,Software,AWS,Estados Unidos,aprobada
+83,142,47,2025-10-01 12:38:52,4810.01,MXN,Viajes,Airbnb,Mexico,aprobada
+84,600,208,2025-10-01 12:39:36,1584003.0,COP,Publicidad,Taboola,Colombia,aprobada
+85,383,128,2025-10-01 12:40:03,87.49,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+86,142,47,2025-10-01 12:43:41,255.59,USD,Viajes,Aeromexico,Singapur,aprobada
+87,848,288,2025-10-01 12:47:44,3034.21,MXN,Software,AWS,Mexico,aprobada
+88,465,156,2025-10-01 12:49:17,730653.0,COP,Servicios Profesionales,Deloitte,Colombia,aprobada
+89,524,178,2025-10-01 12:54:36,214.44,BRL,Publicidad,TikTok Ads,Brasil,aprobada
+90,880,297,2025-10-01 12:59:14,251.29,USD,Viajes,LATAM Airlines,Irlanda,aprobada
+91,601,208,2025-10-01 12:59:38,245.02,USD,Viajes,Aeromexico,Singapur,aprobada
+92,131,43,2025-10-01 13:00:26,3726867.0,COP,Logistica,Estafeta,Colombia,aprobada
+93,889,299,2025-10-01 13:00:48,303.62,BRL,Alimentos,Rappi,Brasil,aprobada
+94,131,43,2025-10-01 13:01:32,1178772.0,COP,Servicios Profesionales,Upwork,Colombia,aprobada
+95,788,272,2025-10-01 13:02:46,3013.11,MXN,Software,GitHub,Mexico,aprobada
+96,633,221,2025-10-01 13:05:02,2576.07,MXN,Otros,Donativo ONG,Mexico,aprobada
+97,832,285,2025-10-01 13:07:54,366.72,USD,Viajes,Airbnb,Estados Unidos,aprobada
+98,60,20,2025-10-01 13:08:50,6222877.0,COP,Viajes,,Colombia,aprobada
+99,634,221,2025-10-01 13:11:09,496.03,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+100,460,153,2025-10-01 13:11:50,278.96,USD,Software,Microsoft 365,Paises Bajos,aprobada
+101,613,212,2025-10-01 13:21:56,2296508.0,COP,Software,AWS,Colombia,aprobada
+102,610,212,2025-10-01 13:22:06,211.61,USD,Logistica,Servientrega,Irlanda,aprobada
+103,97,33,2025-10-01 13:23:44,762.04,MXN,Logistica,FedEx,Mexico,aprobada
+104,172,58,2025-10-01 13:26:04,196520.0,COP,Alimentos,Sodexo Comedor,Colombia,aprobada
+105,379,128,2025-10-01 13:29:38,16538.56,MXN,Servicios Profesionales,Despacho Contable Lopez,Mexico,aprobada
+106,372,126,2025-10-01 13:29:54,1021.79,MXN,Alimentos,Rappi,Mexico,rechazada
+107,60,20,2025-10-01 13:30:20,1026.94,USD,Viajes,Copa Airlines,Paises Bajos,aprobada
+108,789,272,2025-10-01 13:37:05,190.31,USD,Otros,Tienda en Linea,Estados Unidos,aprobada
+109,726,249,2025-10-01 13:45:53,297.44,USD,Servicios Profesionales,Deloitte,Estados Unidos,aprobada
+110,368,126,2025-10-01 13:46:29,187.03,USD,Software,AWS,Irlanda,aprobada
+111,372,126,2025-10-01 13:47:13,883.25,MXN,Oficina,Staples,Mexico,aprobada
+112,130,43,2025-10-01 13:48:32,650915.0,COP,Alimentos,Starbucks,Colombia,aprobada
+113,837,285,2025-10-01 13:53:05,608.62,USD,Software,Atlassian,Estados Unidos,aprobada
+114,110,36,2025-10-01 13:54:44,199.44,USD,Oficina,WeWork,Estados Unidos,aprobada
+115,370,126,2025-10-01 13:55:33,1977.83,MXN,Alimentos,Rappi,Mexico,aprobada
+116,660,228,2025-10-01 13:56:47,1766.67,USD,Viajes,Uber,Estados Unidos,aprobada
+117,235,82,2025-10-01 13:58:39,401.88,USD,Viajes,LATAM Airlines,Singapur,aprobada
+118,480,163,2025-10-01 14:10:13,-8787.5,MXN,Servicios Profesionales,Upwork,Mexico,reversada
+119,142,47,2025-10-01 14:11:02,4483.41,MXN,Servicios Profesionales,Despacho Contable Lopez,Mexico,aprobada
+120,381,128,2025-10-01 14:14:57,26014.39,MXN,Publicidad,Taboola,Mexico,aprobada
+121,704,241,2025-10-01 14:15:28,1228.08,USD,Viajes,Hotel Fiesta Inn,Singapur,aprobada
+122,731,251,2025-10-01 14:24:08,310250.0,COP,Logistica,99 Minutos,Colombia,aprobada
+123,608,212,2025-10-01 14:27:26,-3021045.0,COP,Software,Zoom,Brasil,reversada
+124,383,128,2025-10-01 14:28:11,308.44,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+125,886,299,2025-10-01 14:30:13,1011.64,BRL,Viajes,Airbnb,Brasil,aprobada
+126,131,43,2025-10-01 14:31:12,1229283.0,COP,Servicios Profesionales,Deloitte,Brasil,aprobada
+127,303,100,2025-10-01 14:33:20,-767.91,USD,Software,GitHub,Paises Bajos,reversada
+128,377,128,2025-10-01 14:42:01,5065.95,MXN,Publicidad,Google Ads,Mexico,aprobada
+129,51,19,2025-10-01 14:47:28,76.64,USD,Publicidad,,Estados Unidos,aprobada
+130,788,272,2025-10-01 14:47:54,344.76,USD,Software,AWS,Estados Unidos,aprobada
+131,480,163,2025-10-01 14:49:24,2660.51,MXN,Otros,Pago Servicios Varios,Mexico,aprobada
+132,610,212,2025-10-01 14:55:09,290.64,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+133,633,221,2025-10-01 14:58:02,1109.25,MXN,Alimentos,Oxxo,Mexico,aprobada
+134,569,198,2025-10-01 15:02:26,375.21,BRL,Software,AWS,Brasil,aprobada
+135,239,82,2025-10-01 15:02:29,5266.79,MXN,Viajes,Copa Airlines,Mexico,aprobada
+136,425,141,2025-10-01 15:05:48,2787.12,MXN,Logistica,DHL,Mexico,aprobada
+137,500,168,2025-10-01 15:09:21,-397.76,USD,Publicidad,Meta Ads,Irlanda,reversada
+138,306,100,2025-10-01 15:14:42,159.04,BRL,Software,Google Workspace,Brasil,aprobada
+139,377,128,2025-10-01 15:15:58,1118.36,MXN,Otros,Pago Servicios Varios,Mexico,aprobada
+140,491,166,2025-10-01 15:17:20,4461.6,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+141,60,20,2025-10-01 15:19:29,168321.0,COP,Viajes,Aeromexico,Colombia,aprobada
+142,303,100,2025-10-01 15:19:39,606.11,USD,Publicidad,Taboola,Estados Unidos,aprobada
+143,613,212,2025-10-01 15:19:58,2028.42,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+144,181,61,2025-10-01 15:22:04,653783.0,COP,Servicios Profesionales,Notaria 14,Colombia,aprobada
+145,308,101,2025-10-01 15:42:00,5882.38,BRL,Software,AWS,Brasil,aprobada
+146,177,61,2025-10-01 15:45:05,1454876.0,COP,Servicios Profesionales,Upwork,Colombia,aprobada
+147,848,288,2025-10-01 15:46:08,120.57,USD,Publicidad,LinkedIn Ads,Estados Unidos,aprobada
+148,309,101,2025-10-01 15:47:02,36.38,USD,Software,AWS,Estados Unidos,aprobada
+149,370,126,2025-10-01 15:49:57,5999.97,MXN,Logistica,DHL,Mexico,aprobada
+150,630,220,2025-10-01 15:58:03,111.29,USD,Software,AWS,Estados Unidos,aprobada
+151,369,126,2025-10-01 16:03:08,2079.38,MXN,Logistica,99 Minutos,Mexico,aprobada
+152,110,36,2025-10-01 16:07:24,1516.96,MXN,Publicidad,TikTok Ads,Mexico,aprobada
+153,666,230,2025-10-01 16:07:53,127.84,MXN,Alimentos,Starbucks,Mexico,aprobada
+154,239,82,2025-10-01 16:09:42,1312.4,MXN,Alimentos,Starbucks,Mexico,aprobada
+155,634,221,2025-10-01 16:13:23,1829.29,MXN,Logistica,Servientrega,Mexico,aprobada
+156,704,241,2025-10-01 16:14:38,125.22,USD,Viajes,Aeromexico,Paises Bajos,aprobada
+157,370,126,2025-10-01 16:16:39,13263.08,MXN,Viajes,Uber,Mexico,aprobada
+158,423,141,2025-10-01 16:20:29,11995.41,MXN,Software,GitHub,Mexico,aprobada
+159,60,20,2025-10-01 16:24:55,868576.0,COP,Logistica,Correios,Colombia,aprobada
+160,130,43,2025-10-01 16:25:45,5061066.0,COP,Servicios Profesionales,Deloitte,Colombia,aprobada
+161,703,241,2025-10-01 16:27:57,6666.13,BRL,Otros,Pago Servicios Varios,Brasil,aprobada
+162,368,126,2025-10-01 16:29:05,4417.08,MXN,Servicios Profesionales,Legalzoom,Mexico,aprobada
+163,526,178,2025-10-01 16:30:49,345.03,USD,Publicidad,X Ads,Singapur,aprobada
+164,633,221,2025-10-01 16:42:41,69.41,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+165,608,212,2025-10-01 16:42:46,1593361.0,COP,Servicios Profesionales,Upwork,Colombia,aprobada
+166,610,212,2025-10-01 16:42:48,2480285.0,COP,Servicios Profesionales,Notaria 14,Colombia,aprobada
+167,177,61,2025-10-01 16:49:37,421889.0,COP,Servicios Profesionales,Deloitte,Colombia,aprobada
+168,348,118,2025-10-01 16:57:13,127036.0,COP,Alimentos,Rappi,Colombia,aprobada
+169,887,299,2025-10-01 17:03:07,1002.76,USD,Software,Notion,Estados Unidos,aprobada
+170,880,297,2025-10-01 17:06:02,218.09,BRL,Alimentos,Oxxo,Brasil,aprobada
+171,464,156,2025-10-01 17:06:38,687773.0,COP,Alimentos,Sodexo Comedor,Colombia,aprobada
+172,837,285,2025-10-01 17:06:43,305123.0,COP,Otros,Pago Servicios Varios,Mexico,aprobada
+173,838,285,2025-10-01 17:08:54,1615059.0,COP,Publicidad,Meta Ads,Colombia,aprobada
+174,106,36,2025-10-01 17:12:57,201.49,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+175,555,195,2025-10-01 17:13:04,593.75,MXN,Oficina,Office Depot,Mexico,aprobada
+176,702,241,2025-10-01 17:14:12,2001.38,BRL,Publicidad,Google Ads,Brasil,aprobada
+177,611,212,2025-10-01 17:14:26,555305.0,COP,Logistica,DHL,Colombia,rechazada
+178,206,69,2025-10-01 17:17:45,4445.11,MXN,Publicidad,Google Ads,Mexico,aprobada
+179,513,175,2025-10-01 17:22:17,71.26,USD,Software,Slack,Paises Bajos,aprobada
+180,702,241,2025-10-01 17:28:04,1223.48,BRL,Software,Slack,Brasil,aprobada
+181,235,82,2025-10-01 17:33:08,14716.04,MXN,Logistica,FedEx,Colombia,aprobada
+182,235,82,2025-10-01 17:33:08,14716.04,MXN,Logistica,FedEx,Colombia,aprobada
+183,383,128,2025-10-01 17:39:45,1709.28,MXN,Otros,Lavanderia Express,Mexico,aprobada
+184,608,212,2025-10-01 17:43:09,342.6,USD,Software,Slack,Paises Bajos,aprobada
+185,367,126,2025-10-01 17:56:38,1765.09,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+186,422,141,2025-10-01 17:57:46,175.15,USD,Software,AWS,Estados Unidos,aprobada
+187,144,47,2025-10-01 18:03:30,3147.21,MXN,Logistica,Correios,Mexico,aprobada
+188,513,175,2025-10-01 18:28:51,806.85,USD,Publicidad,LinkedIn Ads,Irlanda,aprobada
+189,608,212,2025-10-01 18:29:25,372639.0,COP,Logistica,DHL,Colombia,aprobada
+190,134,44,2025-10-01 18:39:13,4761.81,MXN,Logistica,DHL,Mexico,aprobada
+191,408,135,2025-10-01 18:46:26,471443.0,COP,Software,Google Workspace,Colombia,aprobada
+192,890,299,2025-10-01 18:47:01,11409.35,BRL,Viajes,Booking.com,Brasil,rechazada
+193,491,166,2025-10-01 18:50:52,8020.24,MXN,Logistica,Estafeta,Mexico,aprobada
+194,612,212,2025-10-01 18:51:29,642252.0,COP,Otros,Donativo ONG,Colombia,aprobada
+195,370,126,2025-10-01 19:00:30,11909.91,MXN,Publicidad,TikTok Ads,Mexico,aprobada
+196,144,47,2025-10-01 19:07:03,4992.07,MXN,Viajes,Booking.com,Mexico,aprobada
+197,608,212,2025-10-01 19:22:52,76.8,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+198,368,126,2025-10-01 19:31:04,1780.56,MXN,Oficina,Staples,Mexico,aprobada
+199,177,61,2025-10-01 19:37:46,1964214.0,COP,Viajes,LATAM Airlines,Colombia,aprobada
+200,481,163,2025-10-01 19:50:55,13730.97,MXN,Viajes,Volaris,Mexico,aprobada
+201,177,61,2025-10-01 19:51:04,538286.0,COP,Logistica,Mercado Envios,Colombia,aprobada
+202,144,47,2025-10-01 19:52:38,-350.3,USD,Otros,Tienda en Linea,Estados Unidos,reversada
+203,482,163,2025-10-01 19:53:24,656.66,MXN,Alimentos,Uber Eats,Mexico,aprobada
+204,60,20,2025-10-01 19:58:32,549855.0,COP,Software,AWS,Colombia,rechazada
+205,235,82,2025-10-01 20:03:15,368.09,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+206,503,169,2025-10-01 20:20:38,94.06,USD,Publicidad,Google Ads,Irlanda,aprobada
+207,703,241,2025-10-01 20:22:14,752.83,USD,Logistica,Mercado Envios,Estados Unidos,aprobada
+208,58,20,2025-10-01 20:26:48,110062.0,COP,Alimentos,Rappi,Colombia,aprobada
+209,302,100,2025-10-01 20:43:15,261.83,USD,Publicidad,TikTok Ads,Estados Unidos,aprobada
+210,610,212,2025-10-01 20:51:32,204.04,USD,Software,Zoom,Estados Unidos,aprobada
+211,608,212,2025-10-01 20:52:10,1464326.0,COP,Oficina,Office Depot,Colombia,aprobada
+212,491,166,2025-10-01 21:07:54,22279.73,MXN,Viajes,Uber,Mexico,rechazada
+213,745,255,2025-10-01 21:14:52,258.16,USD,Publicidad,Meta Ads,Estados Unidos,aprobada
+214,235,82,2025-10-01 21:17:32,730.74,MXN,Oficina,Office Depot,Mexico,aprobada
+215,144,47,2025-10-01 22:14:06,686.15,MXN,Otros,Suscripcion Mensual,Mexico,aprobada
+216,422,141,2025-10-01 22:28:18,2011.49,MXN,Software,Zoom,Mexico,aprobada
+217,786,272,2025-10-01 22:41:30,160.7,USD,Viajes,Airbnb,Irlanda,aprobada
+218,788,272,2025-10-01 23:18:14,1683.45,MXN,Otros,Pago Servicios Varios,Mexico,aprobada
+219,236,82,2025-10-01 23:25:38,727.24,USD,Viajes,Volaris,Irlanda,aprobada
+220,890,299,2025-10-02 01:01:44,354.54,BRL,Oficina,Kalunga,Brasil,aprobada
+221,831,285,2025-10-02 01:01:51,122.94,USD,Software,Microsoft 365,Estados Unidos,aprobada
+222,499,168,2025-10-02 01:35:17,1033.29,BRL,Logistica,Estafeta,Brasil,aprobada
+223,233,81,2025-10-02 02:29:44,70.01,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+224,610,212,2025-10-02 02:40:01,374.85,USD,Software,AWS,Estados Unidos,aprobada
+225,144,47,2025-10-02 02:47:11,1232.95,MXN,Alimentos,Sanborns,Mexico,aprobada
+226,131,43,2025-10-02 02:59:37,3734269.0,COP,Viajes,LATAM Airlines,Colombia,aprobada
+227,54,20,2025-10-02 03:08:34,259.44,USD,Viajes,Volaris,Irlanda,aprobada
+228,666,230,2025-10-02 05:47:34,1589.65,MXN,Viajes,Volaris,Mexico,aprobada
+229,837,285,2025-10-02 05:54:28,1107357.0,COP,Logistica,DHL,Colombia,aprobada
+230,660,228,2025-10-02 06:13:48,2814.01,USD,Viajes,Copa Airlines,Estados Unidos,aprobada
+231,370,126,2025-10-02 06:17:03,2038.14,MXN,Oficina,Office Depot,Mexico,aprobada
+232,789,272,2025-10-02 07:08:41,5094.99,MXN,Logistica,FedEx,Peru,aprobada
+233,134,44,2025-10-02 07:10:19,2163.86,MXN,Servicios Profesionales,Notaria 14,Chile,aprobada
+234,497,168,2025-10-02 07:21:43,53.81,BRL,Alimentos,Rappi,Brasil,aprobada
+235,565,197,2025-10-02 07:24:47,1188348.0,COP,Logistica,DHL,Colombia,aprobada
+236,610,212,2025-10-02 07:28:02,109.91,USD,Logistica,DHL,Estados Unidos,aprobada
+237,890,299,2025-10-02 07:32:37,547.12,USD,Software,Microsoft 365,Estados Unidos,aprobada
+238,549,191,2025-10-02 07:47:18,939.11,BRL,Servicios Profesionales,Despacho Contable Lopez,Brasil,aprobada
+239,890,299,2025-10-02 07:55:47,356.32,USD,Software,Figma,Estados Unidos,aprobada
+240,231,79,2025-10-02 07:57:13,2358708.0,COP,Publicidad,LinkedIn Ads,Mexico,aprobada
+241,237,82,2025-10-02 08:03:32,1434.44,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+242,611,212,2025-10-02 08:09:48,2143111.0,COP,Logistica,99 Minutos,Colombia,aprobada
+243,491,166,2025-10-02 08:10:05,1287.24,MXN,Alimentos,Starbucks,Mexico,rechazada
+244,179,61,2025-10-02 08:18:59,2956640.0,COP,Oficina,Amazon Business,Colombia,aprobada
+245,177,61,2025-10-02 08:19:40,930.13,USD,Software,AWS,Estados Unidos,aprobada
+246,422,141,2025-10-02 08:23:34,88.72,USD,Software,Atlassian,Estados Unidos,aprobada
+247,831,285,2025-10-02 08:23:42,302688.0,COP,Alimentos,Starbucks,Colombia,aprobada
+248,142,47,2025-10-02 08:27:10,13341.42,MXN,Servicios Profesionales,Notaria 14,Mexico,aprobada
+249,552,194,2025-10-02 08:28:51,133.63,USD,Viajes,Copa Airlines,Irlanda,aprobada
+250,480,163,2025-10-02 08:32:48,26.63,USD,Software,Google Workspace,Irlanda,aprobada
+251,366,125,2025-10-02 08:34:43,11157.21,MXN,Logistica,FedEx,Mexico,aprobada
+252,36,15,2025-10-02 08:47:24,1532.06,MXN,Oficina,Office Depot,Mexico,aprobada
+253,96,33,2025-10-02 08:52:55,1874.29,MXN,Logistica,DHL,Mexico,aprobada
+254,482,163,2025-10-02 08:59:23,1337.51,MXN,Oficina,Office Depot,Mexico,aprobada
+255,424,141,2025-10-02 09:03:07,1822.35,MXN,Otros,Comercio General,Mexico,aprobada
+256,834,285,2025-10-02 09:07:36,288667.0,COP,Oficina,Office Depot,Colombia,rechazada
+257,791,272,2025-10-02 09:12:09,56.53,USD,Software,Google Workspace,Paises Bajos,aprobada
+258,491,166,2025-10-02 09:12:30,13300.19,MXN,Servicios Profesionales,Despacho Contable Lopez,Mexico,aprobada
+259,134,44,2025-10-02 09:13:53,2293.7,MXN,Alimentos,Rappi,Mexico,aprobada
+260,608,212,2025-10-02 09:19:57,24946450.0,COP,Viajes,Uber,Colombia,aprobada
+261,423,141,2025-10-02 09:22:06,866.3,USD,Publicidad,Google Ads,Paises Bajos,aprobada
+262,642,223,2025-10-02 09:24:19,166159.0,COP,Publicidad,Google Ads,Colombia,aprobada
+263,142,47,2025-10-02 09:25:21,53333.98,MXN,Viajes,Aeromexico,Mexico,aprobada
+264,610,212,2025-10-02 09:27:03,1098132.0,COP,Otros,Pago Servicios Varios,Colombia,aprobada
+265,703,241,2025-10-02 09:28:03,1016.94,BRL,Logistica,DHL,Brasil,rechazada
+266,459,153,2025-10-02 09:30:17,450.52,USD,Publicidad,X Ads,Estados Unidos,aprobada
+267,57,20,2025-10-02 09:30:28,-1287714.0,COP,Viajes,LATAM Airlines,Colombia,reversada
+268,58,20,2025-10-02 09:31:21,3634265.0,COP,Servicios Profesionales,Consultoria Andina,Colombia,rechazada
+269,236,82,2025-10-02 09:35:16,190.37,USD,Logistica,Correios,Estados Unidos,aprobada
+270,836,285,2025-10-02 09:39:53,1649.96,USD,Publicidad,Meta Ads,Estados Unidos,aprobada
+271,379,128,2025-10-02 09:49:14,97.01,USD,Alimentos,Starbucks,Paises Bajos,aprobada
+272,144,47,2025-10-02 09:53:26,13852.49,MXN,Viajes,Aeromexico,Mexico,aprobada
+273,880,297,2025-10-02 09:53:44,224.87,BRL,Otros,Comercio General,Chile,rechazada
+274,403,132,2025-10-02 09:56:52,83.75,BRL,Alimentos,Starbucks,Brasil,aprobada
+275,702,241,2025-10-02 09:59:22,1023.81,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+276,175,61,2025-10-02 10:01:03,365868.0,COP,Otros,Parking Plus,Colombia,aprobada
+277,554,194,2025-10-02 10:07:39,446.18,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+278,500,168,2025-10-02 10:10:05,897.74,BRL,Servicios Profesionales,Deloitte,Chile,aprobada
+279,610,212,2025-10-02 10:12:40,347049.0,COP,Alimentos,Oxxo,Colombia,aprobada
+280,882,297,2025-10-02 10:14:08,3789.57,BRL,Viajes,Avianca,Brasil,aprobada
+281,608,212,2025-10-02 10:18:11,1552521.0,COP,Publicidad,Google Ads,Colombia,aprobada
+282,891,299,2025-10-02 10:20:26,1059.05,BRL,Logistica,Coordinadora,Brasil,aprobada
+283,563,197,2025-10-02 10:23:19,847041.0,COP,Servicios Profesionales,Deloitte,Colombia,rechazada
+284,610,212,2025-10-02 10:23:36,753199.0,COP,Servicios Profesionales,Despacho Contable Lopez,Colombia,aprobada
+285,130,43,2025-10-02 10:23:52,1985065.0,COP,Viajes,Hotel Fiesta Inn,Colombia,aprobada
+286,479,163,2025-10-02 10:24:35,4778.48,MXN,Software,AWS,Mexico,aprobada
+287,668,230,2025-10-02 10:25:48,976.55,MXN,Software,AWS,Mexico,aprobada
+288,177,61,2025-10-02 10:26:56,341.59,USD,Software,Google Workspace,Estados Unidos,aprobada
+289,370,126,2025-10-02 10:33:39,1400.48,MXN,Otros,Donativo ONG,Mexico,rechazada
+290,601,208,2025-10-02 10:34:04,923049.0,COP,Servicios Profesionales,Deloitte,Colombia,aprobada
+291,788,272,2025-10-02 10:35:45,30069.08,MXN,Servicios Profesionales,Legalzoom,Mexico,aprobada
+292,458,153,2025-10-02 10:48:00,941.18,MXN,Alimentos,Sodexo Comedor,Mexico,aprobada
+293,201,69,2025-10-02 10:52:36,11044.0,MXN,Publicidad,TikTok Ads,Mexico,aprobada
+294,482,163,2025-10-02 10:52:57,26830.22,MXN,Oficina,Office Depot,Mexico,aprobada
+295,790,272,2025-10-02 10:55:02,-379.35,USD,Publicidad,Mailchimp,Estados Unidos,reversada
+296,144,47,2025-10-02 10:55:44,39254.81,MXN,Viajes,LATAM Airlines,Mexico,aprobada
+297,377,128,2025-10-02 11:03:06,3696.59,MXN,Publicidad,Meta Ads,Mexico,aprobada
+298,133,43,2025-10-02 11:09:10,1243.28,USD,Publicidad,X Ads,Paises Bajos,aprobada
+299,481,163,2025-10-02 11:09:59,7005.48,MXN,Otros,Comercio General,Mexico,rechazada
+300,792,272,2025-10-02 11:10:05,335.36,USD,Software,Google Workspace,Estados Unidos,aprobada
+301,791,272,2025-10-02 11:13:16,1563.12,MXN,Otros,Pago Servicios Varios,Mexico,aprobada
+302,555,195,2025-10-02 11:13:50,496.11,MXN,Oficina,WeWork,Mexico,aprobada
+303,171,58,2025-10-02 11:14:09,101.22,USD,Software,AWS,Estados Unidos,aprobada
+304,235,82,2025-10-02 11:14:10,1355.81,MXN,Oficina,WeWork,Mexico,aprobada
+305,58,20,2025-10-02 11:16:19,1306065.0,COP,Logistica,Estafeta,Colombia,aprobada
+306,175,61,2025-10-02 11:18:14,141097.0,COP,Alimentos,Starbucks,Chile,aprobada
+307,302,100,2025-10-02 11:25:02,94.49,BRL,Alimentos,Rappi,Brasil,aprobada
+308,833,285,2025-10-02 11:29:03,3343201.0,COP,Servicios Profesionales,Despacho Contable Lopez,Colombia,aprobada
+309,890,299,2025-10-02 11:36:06,641.18,BRL,Servicios Profesionales,Legalzoom,Brasil,aprobada
+310,21,8,2025-10-02 11:36:35,1364.38,BRL,Servicios Profesionales,Notaria 14,Brasil,rechazada
+311,176,61,2025-10-02 11:38:59,2108642.0,COP,Otros,Pago Servicios Varios,Colombia,aprobada
+312,423,141,2025-10-02 11:46:42,6645.89,MXN,Otros,Pago Servicios Varios,Peru,aprobada
+313,500,168,2025-10-02 11:56:29,2969.57,BRL,Publicidad,LinkedIn Ads,Brasil,aprobada
+314,369,126,2025-10-02 11:57:34,1509.4,MXN,Software,Atlassian,Mexico,aprobada
+315,145,47,2025-10-02 11:58:19,272.6,USD,Software,Google Workspace,Estados Unidos,aprobada
+316,178,61,2025-10-02 11:59:03,475257.0,COP,Oficina,Staples,Colombia,aprobada
+317,60,20,2025-10-02 11:59:23,334.77,USD,Publicidad,LinkedIn Ads,Estados Unidos,aprobada
+318,787,272,2025-10-02 12:12:05,1095.61,MXN,Alimentos,iFood,Mexico,aprobada
+319,303,100,2025-10-02 12:13:23,694.91,BRL,Viajes,Uber,Brasil,aprobada
+320,790,272,2025-10-02 12:15:59,7223.16,MXN,Logistica,Correios,Mexico,aprobada
+321,890,299,2025-10-02 12:16:43,492.41,BRL,Logistica,FedEx,Brasil,aprobada
+322,610,212,2025-10-02 12:16:50,1801017.0,COP,Servicios Profesionales,Upwork,Colombia,aprobada
+323,142,47,2025-10-02 12:17:12,5870.11,MXN,Servicios Profesionales,Notaria 14,Mexico,aprobada
+324,610,212,2025-10-02 12:19:35,217.23,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+325,882,297,2025-10-02 12:25:24,841.34,BRL,Servicios Profesionales,Notaria 14,Brasil,aprobada
+326,144,47,2025-10-02 12:29:50,435.07,USD,Viajes,Uber,Estados Unidos,aprobada
+327,177,61,2025-10-02 12:30:24,240.48,USD,Publicidad,Google Ads,Paises Bajos,aprobada
+328,629,220,2025-10-02 12:30:54,5533.85,MXN,Logistica,FedEx,Mexico,aprobada
+329,185,63,2025-10-02 12:35:07,318.8,USD,Software,Google Workspace,Paises Bajos,aprobada
+330,632,221,2025-10-02 12:37:18,5954.94,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+331,58,20,2025-10-02 12:37:25,403652.0,COP,Publicidad,Semrush,Colombia,aprobada
+332,58,20,2025-10-02 12:37:25,403652.0,COP,Publicidad,Semrush,Colombia,aprobada
+333,144,47,2025-10-02 12:39:09,138.71,USD,Viajes,LATAM Airlines,Estados Unidos,aprobada
+334,59,20,2025-10-02 12:39:34,251.31,USD,Viajes,Avianca,Irlanda,aprobada
+335,608,212,2025-10-02 12:47:50,-281828.0,COP,Alimentos,Rappi,Colombia,reversada
+336,144,47,2025-10-02 12:49:32,2751.78,MXN,Viajes,LATAM Airlines,Mexico,aprobada
+337,554,194,2025-10-02 12:50:43,510.91,BRL,Publicidad,Google Ads,Brasil,aprobada
+338,177,61,2025-10-02 12:52:51,2519410.0,COP,Logistica,Estafeta,Colombia,aprobada
+339,134,44,2025-10-02 12:53:51,29.61,USD,Alimentos,Rappi,Estados Unidos,aprobada
+340,233,81,2025-10-02 12:55:01,909.2,USD,Software,AWS,Irlanda,aprobada
+341,425,141,2025-10-02 12:56:16,16609.25,MXN,Software,Zoom,Mexico,aprobada
+342,482,163,2025-10-02 12:56:21,1039.56,USD,Publicidad,Mailchimp,Estados Unidos,aprobada
+343,791,272,2025-10-02 12:57:48,2964.06,MXN,Publicidad,Google Ads,Mexico,aprobada
+344,871,294,2025-10-02 12:58:18,10403.44,MXN,Software,AWS,Mexico,aprobada
+345,481,163,2025-10-02 13:02:51,409.2,USD,Viajes,LATAM Airlines,Estados Unidos,aprobada
+346,381,128,2025-10-02 13:07:47,5565.96,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+347,142,47,2025-10-02 13:10:21,1530.64,MXN,Otros,Pago Servicios Varios,Mexico,aprobada
+348,667,230,2025-10-02 13:11:23,1359.81,MXN,Oficina,Staples,Mexico,aprobada
+349,886,299,2025-10-02 13:12:21,5542.79,BRL,Servicios Profesionales,Deloitte,Brasil,aprobada
+350,889,299,2025-10-02 13:12:33,937.81,BRL,Logistica,Estafeta,Brasil,aprobada
+351,610,212,2025-10-02 13:28:55,388269.0,COP,Logistica,DHL,Colombia,aprobada
+352,132,43,2025-10-02 13:30:14,450588.0,COP,Otros,Lavanderia Express,Colombia,aprobada
+353,556,195,2025-10-02 13:31:54,355.3,MXN,Oficina,Staples,Mexico,rechazada
+354,887,299,2025-10-02 13:33:05,11687.73,BRL,Viajes,Aeromexico,Brasil,aprobada
+355,611,212,2025-10-02 13:37:23,86.62,USD,Software,Zoom,Paises Bajos,aprobada
+356,372,126,2025-10-02 13:42:47,1566.34,MXN,Software,Figma,Mexico,aprobada
+357,610,212,2025-10-02 13:43:41,140897.0,COP,Alimentos,Rappi,Colombia,aprobada
+358,884,298,2025-10-02 13:52:20,80.91,BRL,Alimentos,Oxxo,Brasil,aprobada
+359,884,298,2025-10-02 13:52:20,80.91,BRL,Alimentos,Oxxo,Brasil,aprobada
+360,493,167,2025-10-02 13:53:15,179.63,USD,Publicidad,Meta Ads,Estados Unidos,aprobada
+361,60,20,2025-10-02 13:56:06,649080.0,COP,Oficina,Amazon Business,Colombia,aprobada
+362,636,221,2025-10-02 13:56:15,263.68,USD,Otros,Comercio General,Paises Bajos,aprobada
+363,185,63,2025-10-02 13:56:38,230.36,USD,Publicidad,Meta Ads,Singapur,aprobada
+364,889,299,2025-10-02 13:57:23,473.77,BRL,Alimentos,Starbucks,Brasil,aprobada
+365,373,127,2025-10-02 13:57:38,157.84,USD,Software,Zoom,Estados Unidos,aprobada
+366,837,285,2025-10-02 13:59:04,818.18,USD,Servicios Profesionales,Deloitte,Estados Unidos,aprobada
+367,109,36,2025-10-02 13:59:52,2407.73,MXN,Viajes,Aeromexico,Mexico,aprobada
+368,143,47,2025-10-02 14:11:21,3183.12,MXN,Viajes,Aeromexico,Mexico,aprobada
+369,143,47,2025-10-02 14:19:39,3106.85,MXN,Oficina,Office Depot,Mexico,aprobada
+370,600,208,2025-10-02 14:21:56,262.99,USD,Software,Notion,Estados Unidos,aprobada
+371,144,47,2025-10-02 14:24:48,1124.95,MXN,Alimentos,Starbucks,Mexico,aprobada
+372,499,168,2025-10-02 14:25:41,1065.09,BRL,Logistica,DHL,Brasil,aprobada
+373,492,167,2025-10-02 14:32:27,6241.39,BRL,Viajes,Aeromexico,Brasil,aprobada
+374,611,212,2025-10-02 14:38:35,1066184.0,COP,Servicios Profesionales,Despacho Contable Lopez,Colombia,aprobada
+375,786,272,2025-10-02 14:39:14,764.56,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+376,60,20,2025-10-02 14:44:03,991.71,USD,Viajes,Avianca,Irlanda,aprobada
+377,891,299,2025-10-02 14:48:05,6544.75,BRL,Servicios Profesionales,Despacho Contable Lopez,Chile,aprobada
+378,832,285,2025-10-02 14:52:49,193327.0,COP,Oficina,Staples,Colombia,aprobada
+379,21,8,2025-10-02 14:54:58,4939.55,BRL,Servicios Profesionales,Deloitte,Brasil,aprobada
+380,525,178,2025-10-02 15:01:34,672.85,BRL,Otros,Pago Servicios Varios,Brasil,aprobada
+381,628,220,2025-10-02 15:02:02,316.39,USD,Software,AWS,Irlanda,aprobada
+382,383,128,2025-10-02 15:02:57,2426.1,MXN,Logistica,DHL,Mexico,aprobada
+383,610,212,2025-10-02 15:04:54,438731.0,COP,Logistica,Mercado Envios,Colombia,aprobada
+384,704,241,2025-10-02 15:08:31,351.44,USD,Software,AWS,Estados Unidos,aprobada
+385,175,61,2025-10-02 15:08:53,1678973.0,COP,Software,AWS,Colombia,aprobada
+386,600,208,2025-10-02 15:15:49,443.33,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+387,840,285,2025-10-02 15:16:09,1654812.0,COP,Software,Figma,Colombia,aprobada
+388,661,228,2025-10-02 15:16:38,328.92,USD,Publicidad,Taboola,Estados Unidos,aprobada
+389,498,168,2025-10-02 15:17:25,241.38,BRL,Software,Microsoft 365,Brasil,aprobada
+390,788,272,2025-10-02 15:17:57,812.51,USD,Viajes,Booking.com,Estados Unidos,aprobada
+391,499,168,2025-10-02 15:18:42,1311.96,USD,Publicidad,Google Ads,Singapur,aprobada
+392,233,81,2025-10-02 15:20:40,77.96,USD,Software,AWS,Paises Bajos,aprobada
+393,849,288,2025-10-02 15:20:42,3536.83,MXN,Publicidad,Mailchimp,Mexico,aprobada
+394,423,141,2025-10-02 15:24:00,7780.3,MXN,Logistica,DHL,Mexico,aprobada
+395,379,128,2025-10-02 15:30:43,408.33,USD,Publicidad,LinkedIn Ads,Paises Bajos,aprobada
+396,371,126,2025-10-02 15:38:04,1273.07,USD,Viajes,Aeromexico,Estados Unidos,aprobada
+397,629,220,2025-10-02 15:45:41,788.4,USD,Viajes,Hotel Fiesta Inn,Estados Unidos,rechazada
+398,96,33,2025-10-02 15:55:40,17725.56,MXN,Viajes,LATAM Airlines,Mexico,aprobada
+399,370,126,2025-10-02 15:56:45,3441.9,MXN,Logistica,FedEx,Mexico,aprobada
+400,836,285,2025-10-02 16:00:44,1727604.0,COP,Viajes,LATAM Airlines,Colombia,aprobada
+401,868,293,2025-10-02 16:06:09,64.39,USD,Software,Zoom,Estados Unidos,aprobada
+402,210,71,2025-10-02 16:06:35,3281.0,MXN,Software,AWS,Mexico,aprobada
+403,378,128,2025-10-02 16:06:38,2994.46,MXN,Publicidad,Mailchimp,Mexico,aprobada
+404,500,168,2025-10-02 16:10:15,5293.11,BRL,Viajes,Avianca,Brasil,aprobada
+405,458,153,2025-10-02 16:12:51,1213.26,USD,Viajes,Aeromexico,Singapur,aprobada
+406,600,208,2025-10-02 16:13:56,1143289.0,COP,Otros,Donativo ONG,Colombia,aprobada
+407,383,128,2025-10-02 16:15:42,326.27,USD,Software,Google Workspace,Irlanda,aprobada
+408,381,128,2025-10-02 16:15:43,7002.13,MXN,Viajes,Avianca,Mexico,aprobada
+409,704,241,2025-10-02 16:21:23,388.72,BRL,Logistica,FedEx,Brasil,aprobada
+410,726,249,2025-10-02 16:21:32,490.56,MXN,Alimentos,Rappi,Mexico,aprobada
+411,143,47,2025-10-02 16:23:21,4807.82,MXN,Publicidad,TikTok Ads,Mexico,aprobada
+412,59,20,2025-10-02 16:38:05,341.79,USD,Software,Zoom,Estados Unidos,aprobada
+413,484,163,2025-10-02 16:40:25,2475.19,MXN,Viajes,Avianca,Mexico,aprobada
+414,610,212,2025-10-02 16:41:14,1149180.0,COP,Logistica,Estafeta,Peru,aprobada
+415,633,221,2025-10-02 16:41:57,1424.54,USD,Viajes,Airbnb,Paises Bajos,aprobada
+416,702,241,2025-10-02 16:42:18,260.43,USD,Software,AWS,Paises Bajos,aprobada
+417,490,166,2025-10-02 16:46:08,1173.86,MXN,Otros,Pago Servicios Varios,Mexico,aprobada
+418,632,221,2025-10-02 16:51:53,10930.6,MXN,Logistica,DHL,Mexico,aprobada
+419,202,69,2025-10-02 16:59:01,110.69,USD,Viajes,Avianca,Estados Unidos,aprobada
+420,302,100,2025-10-02 16:59:03,74.17,BRL,Alimentos,Sanborns,Brasil,aprobada
+421,425,141,2025-10-02 17:00:36,4323.58,MXN,Logistica,99 Minutos,Mexico,aprobada
+422,425,141,2025-10-02 17:01:16,10320.3,MXN,Servicios Profesionales,Notaria 14,Mexico,aprobada
+423,555,195,2025-10-02 17:03:35,171.6,USD,Publicidad,Meta Ads,Estados Unidos,aprobada
+424,410,137,2025-10-02 17:04:48,783.8,BRL,Publicidad,LinkedIn Ads,Brasil,rechazada
+425,378,128,2025-10-02 17:09:05,537.36,MXN,Otros,Tienda en Linea,Mexico,aprobada
+426,665,230,2025-10-02 17:13:36,259.38,USD,Publicidad,TikTok Ads,Estados Unidos,aprobada
+427,172,58,2025-10-02 17:16:35,218130.0,COP,Software,Google Workspace,Colombia,aprobada
+428,105,36,2025-10-02 17:21:09,1031.63,MXN,Servicios Profesionales,Upwork,Mexico,aprobada
+429,609,212,2025-10-02 17:21:46,468.69,USD,Servicios Profesionales,Upwork,Estados Unidos,aprobada
+430,500,168,2025-10-02 17:26:41,986.58,USD,Viajes,LATAM Airlines,Estados Unidos,aprobada
+431,175,61,2025-10-02 17:27:26,254.22,USD,Publicidad,Google Ads,Irlanda,aprobada
+432,889,299,2025-10-02 17:44:59,1397.72,BRL,Publicidad,Meta Ads,Brasil,aprobada
+433,56,20,2025-10-02 17:51:15,339630.0,COP,Logistica,FedEx,Colombia,aprobada
+434,791,272,2025-10-02 18:03:28,2839.65,MXN,Oficina,Office Depot,Mexico,aprobada
+435,425,141,2025-10-02 18:25:52,176.97,USD,Software,AWS,Estados Unidos,aprobada
+436,370,126,2025-10-02 18:32:34,42559.62,MXN,Software,AWS,Mexico,aprobada
+437,237,82,2025-10-02 18:34:13,149.9,USD,Software,AWS,Estados Unidos,aprobada
+438,851,289,2025-10-02 18:37:49,93366.0,COP,Otros,Lavanderia Express,Colombia,aprobada
+439,502,169,2025-10-02 18:46:48,685.75,MXN,Software,GitHub,Mexico,aprobada
+440,563,197,2025-10-02 19:19:53,66218.0,COP,Alimentos,Juan Valdez,Colombia,aprobada
+441,379,128,2025-10-02 19:19:55,7319.5,MXN,Oficina,Office Depot,Mexico,aprobada
+442,702,241,2025-10-02 19:24:58,641.15,BRL,Alimentos,Sodexo Comedor,Brasil,aprobada
+443,422,141,2025-10-02 19:29:21,810.38,USD,Publicidad,X Ads,Irlanda,aprobada
+444,422,141,2025-10-02 19:49:29,1582.18,MXN,Publicidad,Google Ads,Mexico,aprobada
+445,492,167,2025-10-02 19:51:30,-154.06,BRL,Software,AWS,Brasil,reversada
+446,629,220,2025-10-02 19:51:43,234.89,USD,Publicidad,Semrush,Paises Bajos,aprobada
+447,607,212,2025-10-02 19:56:32,594946.0,COP,Logistica,Mercado Envios,Colombia,aprobada
+448,790,272,2025-10-02 20:04:19,14062.96,MXN,Servicios Profesionales,Upwork,Mexico,aprobada
+449,372,126,2025-10-02 20:18:37,1702.86,MXN,Oficina,Papeleria Dos Mil,Mexico,aprobada
+450,156,54,2025-10-02 20:25:35,66356.0,COP,Alimentos,Uber Eats,Colombia,aprobada
+451,307,100,2025-10-02 20:38:41,105.32,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+452,58,20,2025-10-02 20:55:08,134457.0,COP,Otros,Pago Servicios Varios,Colombia,aprobada
+453,410,137,2025-10-02 22:01:52,250.53,BRL,Alimentos,Sodexo Comedor,Brasil,aprobada
+454,60,20,2025-10-02 22:24:19,963.85,USD,Publicidad,TikTok Ads,Singapur,aprobada
+455,608,212,2025-10-02 22:57:56,218534.0,COP,Logistica,FedEx,Colombia,aprobada
+456,379,128,2025-10-02 23:02:38,1298.65,MXN,Alimentos,Starbucks,Mexico,aprobada
+457,500,168,2025-10-02 23:09:16,-812.87,BRL,Otros,Lavanderia Express,Brasil,reversada
+458,726,249,2025-10-02 23:18:44,2700.22,MXN,Servicios Profesionales,Notaria 14,Mexico,aprobada
+459,144,47,2025-10-02 23:49:37,6013.46,MXN,Publicidad,TikTok Ads,Mexico,aprobada
+460,631,220,2025-10-03 00:09:47,3159.59,MXN,Otros,Tienda en Linea,Mexico,aprobada
+461,665,230,2025-10-03 02:36:15,-5077.1,MXN,Software,AWS,Mexico,reversada
+462,178,61,2025-10-03 05:24:51,6504041.0,COP,Viajes,Aeromexico,Colombia,aprobada
+463,402,132,2025-10-03 05:38:32,2553.69,BRL,Logistica,Correios,Brasil,aprobada
+464,379,128,2025-10-03 05:48:21,17638.94,MXN,Servicios Profesionales,Notaria 14,Mexico,aprobada
+465,378,128,2025-10-03 05:53:44,774.32,USD,Publicidad,Google Ads,Estados Unidos,rechazada
+466,484,163,2025-10-03 06:12:17,9923.32,MXN,Viajes,Aeromexico,Mexico,aprobada
+467,302,100,2025-10-03 06:21:51,97.33,USD,Software,AWS,Estados Unidos,aprobada
+468,422,141,2025-10-03 06:42:07,3322.6,MXN,Servicios Profesionales,Notaria 14,Mexico,aprobada
+469,556,195,2025-10-03 07:45:35,6013.68,MXN,Publicidad,Semrush,Mexico,aprobada
+470,380,128,2025-10-03 07:49:00,562.89,MXN,Oficina,Office Depot,Mexico,aprobada
+471,671,230,2025-10-03 07:50:17,535.14,MXN,Logistica,DHL,Mexico,aprobada
+472,312,103,2025-10-03 08:00:19,1071.17,MXN,Otros,Parking Plus,Mexico,aprobada
+473,170,58,2025-10-03 08:08:58,76990.0,COP,Oficina,Office Depot,Colombia,aprobada
+474,499,168,2025-10-03 08:10:29,2283.0,BRL,Servicios Profesionales,Despacho Contable Lopez,Brasil,aprobada
+475,526,178,2025-10-03 08:11:19,666.03,BRL,Publicidad,TikTok Ads,Brasil,aprobada
+476,491,166,2025-10-03 08:14:29,2828.2,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+477,499,168,2025-10-03 08:14:56,-422.7,BRL,Publicidad,Meta Ads,Brasil,reversada
+478,733,252,2025-10-03 08:18:37,354.53,BRL,Oficina,Staples,Colombia,aprobada
+479,479,163,2025-10-03 08:18:50,228.8,USD,Viajes,Avianca,Irlanda,aprobada
+480,372,126,2025-10-03 08:22:38,9675.94,MXN,Viajes,Aeromexico,Mexico,rechazada
+481,493,167,2025-10-03 08:26:26,180.05,BRL,Alimentos,Oxxo,Brasil,aprobada
+482,60,20,2025-10-03 08:31:43,270204.0,COP,Logistica,FedEx,Colombia,aprobada
+483,465,156,2025-10-03 08:31:57,24.19,USD,Software,AWS,Estados Unidos,rechazada
+484,661,228,2025-10-03 08:36:37,295976.0,COP,Alimentos,iFood,Colombia,aprobada
+485,555,195,2025-10-03 08:47:05,2590.69,MXN,Otros,Suscripcion Mensual,Mexico,aprobada
+486,209,71,2025-10-03 08:50:59,1850.44,MXN,Servicios Profesionales,Fiverr,Mexico,aprobada
+487,377,128,2025-10-03 08:52:33,1761.55,MXN,Oficina,Amazon Business,Mexico,aprobada
+488,317,105,2025-10-03 09:00:47,41072.66,BRL,Viajes,Aeromexico,Brasil,aprobada
+489,559,195,2025-10-03 09:07:15,3203.67,MXN,Oficina,Office Depot,Mexico,aprobada
+490,608,212,2025-10-03 09:09:37,1704405.0,COP,Servicios Profesionales,Consultoria Andina,Colombia,aprobada
+491,499,168,2025-10-03 09:10:14,216.01,BRL,Alimentos,Oxxo,Brasil,aprobada
+492,889,299,2025-10-03 09:13:48,476.6,USD,Servicios Profesionales,,Estados Unidos,aprobada
+493,54,20,2025-10-03 09:13:59,416965.0,COP,Alimentos,Rappi,Colombia,aprobada
+494,636,221,2025-10-03 09:14:09,3339.02,MXN,Logistica,FedEx,Mexico,aprobada
+495,880,297,2025-10-03 09:15:24,145.51,USD,Publicidad,Google Ads,Estados Unidos,aprobada
+496,369,126,2025-10-03 09:18:25,467.18,USD,Publicidad,Mailchimp,Estados Unidos,aprobada
+497,368,126,2025-10-03 09:19:37,3350.81,MXN,Logistica,Servientrega,Mexico,aprobada
+498,667,230,2025-10-03 09:26:08,384.73,MXN,Alimentos,Sodexo Comedor,Mexico,aprobada
+499,210,71,2025-10-03 09:28:57,2796.17,MXN,Servicios Profesionales,Deloitte,Mexico,aprobada
+500,144,47,2025-10-03 09:29:20,917.1,USD,Viajes,Aeromexico,Estados Unidos,aprobada
